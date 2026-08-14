@@ -48,7 +48,8 @@ func (s *Server) StartServer() {
 
 	s.setHandlers()
 	// s.router.Run("localhost:8080")
-	s.router.Run(":8080")
+	//s.router.Run(":8080")
+	s.router.Run(":" + os.Getenv("PORT"))
 }
 
 func (s *Server) setHandlers() {
