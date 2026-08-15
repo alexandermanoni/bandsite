@@ -23,7 +23,7 @@ type UserService interface {
 	// sign up user & store password securely
 	SignupUser(ctx context.Context, email string, password string, verifypassword string) error
 
-	// check email, password are correct and return user id
+	// check email, password are correct and return user id lol
 	LoginUser(ctx context.Context, email string, password string) (int, error)
 
 	// revoke refresh token
