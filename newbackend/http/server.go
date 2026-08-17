@@ -39,7 +39,6 @@ func NewServer() *Server {
 func (s *Server) StartServer() {
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:5173"}
-	// config.AllowOrigins = []string{"*"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowCredentials = true
@@ -47,8 +46,6 @@ func (s *Server) StartServer() {
 	//s.router.Use(cors.Default())
 
 	s.setHandlers()
-	// s.router.Run("localhost:8080")
-	//s.router.Run(":8080")
 	s.router.Run(":" + os.Getenv("PORT"))
 }
 
