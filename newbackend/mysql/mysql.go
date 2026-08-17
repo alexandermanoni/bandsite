@@ -18,7 +18,8 @@ func (db *DB) DBInit() {
 	db.cfg.User = os.Getenv("DBUSER")
 	db.cfg.Passwd = os.Getenv("DBPASS")
 	db.cfg.Net = "tcp"
-	db.cfg.Addr = "127.0.0.1:3306"
+	db.cfg.Addr = os.Getenv("SQLCONNECT")
+	//db.cfg.Addr = "127.0.0.1:3306"
 	db.cfg.DBName = "bandsite"
 
 	var err error

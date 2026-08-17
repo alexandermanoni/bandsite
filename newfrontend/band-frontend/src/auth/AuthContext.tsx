@@ -21,7 +21,9 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     const [authenticated, setAuthenticated] = useState(false);
 
     async function login(email: string, password: string) {
-        const response = await fetch("http://localhost:8080/login", { method: "POST", body: JSON.stringify({ email, password }) });
+        
+        const response = await fetch("https://bandsite-service-943772568820.us-central1.run.app/login", { method: "POST", body: JSON.stringify({ email, password }) });
+        // const response = await fetch("http://localhost:8080/login", { method: "POST", body: JSON.stringify({ email, password }) });
 
         if (!response.ok) {
             // bad request
@@ -46,7 +48,9 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     }
 
     async function signup(email: string, password: string, verifypassword: string) {
-        const response = await fetch("http://localhost:8080/signup", { method: "POST", body: JSON.stringify({ email, password, verifypassword }) });
+        
+        const response = await fetch("https://bandsite-service-943772568820.us-central1.run.app/signup", { method: "POST", body: JSON.stringify({ email, password, verifypassword }) });
+        // const response = await fetch("http://localhost:8080/signup", { method: "POST", body: JSON.stringify({ email, password, verifypassword }) });
 
         if (!response.ok) {
             // return what kind of error
@@ -82,7 +86,9 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     }
 
     async function logout() {
-        const response = await fetch("http://localhost:8080/logout", { method: "POST" });
+        
+        const response = await fetch("https://bandsite-service-943772568820.us-central1.run.app/logout", { method: "POST" });
+        // const response = await fetch("http://localhost:8080/logout", { method: "POST" });
 
         if (!response.ok) {
             // internal server error
@@ -116,7 +122,9 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
             // no access token, try refresh
             try {
                 const response = await fetch(
-                    "http://localhost:8080/auth",
+                    
+                    "https://bandsite-service-943772568820.us-central1.run.app/auth",
+                    // "http://localhost:8080/auth",
                     {
                         method: "POST",
                         credentials: "include",
