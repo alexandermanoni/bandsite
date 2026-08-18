@@ -342,6 +342,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
 
     async function uploadSongSource(song: Song, form: FormData) {
         const result = await apiFetch("uploadsong", { method: "POST", body: form });
+        console.log("Temp fix for gcp: ", song);
 
         if (!result.ok) return;
 
