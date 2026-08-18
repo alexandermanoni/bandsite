@@ -17,8 +17,10 @@ func (db *DB) DBInit() {
 	db.cfg = mysql.NewConfig()
 	db.cfg.User = os.Getenv("DBUSER")
 	db.cfg.Passwd = os.Getenv("DBPASS")
-	db.cfg.Net = "tcp"
-	db.cfg.Addr = os.Getenv("SQLCONNECT")
+	db.cfg.Net = "unix"
+	db.cfg.Addr = "/cloudsql/bandsite-505517:us-south1:free-trial-first-project"
+	// db.cfg.Net = "tcp"
+	// db.cfg.Addr = os.Getenv("SQLCONNECT")
 	//db.cfg.Addr = "127.0.0.1:3306"
 	db.cfg.DBName = "bandsite"
 
