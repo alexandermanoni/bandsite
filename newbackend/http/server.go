@@ -38,7 +38,11 @@ func NewServer() *Server {
 
 func (s *Server) StartServer() {
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:5173"}
+	config.AllowOrigins = []string{
+		"http://localhost:5173",
+		"https://setlistcreationutility.com",
+		"https://www.setlistcreationutility.com",
+	}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowCredentials = true
