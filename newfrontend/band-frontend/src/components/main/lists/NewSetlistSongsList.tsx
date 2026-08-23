@@ -29,11 +29,17 @@ function NewSetlistSongsList({ songs, songpositions, moveSongUp, moveSongDown, r
                         >
                             {song.name}
                             {" "}
-                            <button type="button" onClick={() => moveSongUp(song.id)}>Up</button>
+                            <button id="standardbutton" type="button" onClick={() => moveSongUp(song.id)}>
+                                <span>Up</span>
+                            </button>
                             {" / "}
-                            <button type="button" onClick={() => moveSongDown(song.id)}>Down</button>
+                            <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
+                                <span>Down</span>
+                            </button>
                             {" "}
-                            <button type="button" onClick={() => removeSong(song.id)}>Remove</button>
+                            <button id="standardbutton" type="button" onClick={() => removeSong(song.id)}>
+                                <span>Remove</span>
+                            </button>
                         </li>
                     ))}
             </ol>

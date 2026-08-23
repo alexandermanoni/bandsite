@@ -18,7 +18,9 @@ function DeleteSong({ songid, deleteSong }: DeleteSongProps) {
     return (
         <>
             {/* <button type="button" onClick={() => deleteSong(songid)}>Delete</button> */}
-            <button type="button" onClick={() => handleDelete(songid)}>Delete</button>
+            <button id="criticalbutton" type="button" onClick={() => handleDelete(songid)}>
+                <span>Delete</span>
+            </button>
         </>
     );
 }

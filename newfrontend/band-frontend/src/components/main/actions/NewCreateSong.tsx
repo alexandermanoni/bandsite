@@ -28,8 +28,10 @@ function NewCreateSong({ createSongForContext }: NewCreateSongProps) {
             <label>
                 New Song Name: <input name="songNameInput" type="text" />
             </label>
-
-            <button type="submit">Create Song</button>
+            {" "}
+            <button type="submit">
+                <span>Create Song</span>
+            </button>
         </form>
     );
 }

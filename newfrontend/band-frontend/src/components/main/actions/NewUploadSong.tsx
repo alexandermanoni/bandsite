@@ -21,7 +21,12 @@ function NewUploadSong({ song, uploadSongSource }: NewUploadSongProps) {
         uploadSongSource(song, formData);
     }
     return (
-        <input id="upload-song" name="uploadsong" type="file" accept="audio/*" onChange={handleSubmit}/>
+        <>
+            <input id="upload-song" type="file" accept="audio/*" onChange={handleSubmit}/>
+            <button onClick={() => document.getElementById("upload-song")?.click()}>
+                <span>Upload Audio File</span>
+            </button>
+        </>
     );
 }
 

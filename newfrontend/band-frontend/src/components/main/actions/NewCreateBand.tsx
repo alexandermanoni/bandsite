@@ -28,8 +28,10 @@ function NewCreateBand({ createBandForContext }: NewCreateBandProps) {
             <label>
                 New Band Name: <input name="bandNameInput" type="text" />
             </label>
-
-            <button type="submit">Create Band</button>
+            {" "}
+            <button type="submit">
+                <span>Create Band</span>
+            </button>
         </form>
     );
 }

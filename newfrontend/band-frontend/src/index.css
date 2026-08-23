@@ -1,11 +1,14 @@
 :root {
   --sans: Helvetica, system-ui;   
   /* --bg: #F0F0F0; */
-  --bg: #eaeaea;
+  /* --bg: #eaeaea; */
+  /* --bg: linear-gradient(#c6803c, #E39E58 20%, 50%, #A36A31 90%); */
 
   /* font: 18px/100% var(--sans); */
   font: var(--sans);
-  background: var(--bg);
+  /* background: var(--bg); */
+  /* background: linear-gradient(#c6803c, #E39E58 20%, 50%, #A36A31 90%); */
+  background: white;
 }
 
 #root {
@@ -16,12 +19,411 @@
 }
 
 body {
-  background:#FFF;
-  border-radius: 8px;
+  /* background:#FFF; */
+  /* background: #eaeaea; */
+  /* background: linear-gradient(#c6803c, #E39E58 20%, 50%, #A36A31 90%); */
+  border-radius: 16px;
+  /* background: #FFF; */
+  background: repeating-linear-gradient(
+  to bottom,
+  white 0px,
+  white 2px,
+  #f0f0f0 2px,
+  #f0f0f0 4px
+);
 }
 
 #maincontent {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #94efff 0%,
+      #5f92ff 50%,
+      #1d64ff 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #5fc5dd 0%,
+      #285dcc 50%,
+      #00329c 100%
+    ) border-box;
+}
+
+button span {
+  color: black;
+  padding: 0 12px;
+  border-radius: 4px;
+
+  font-weight: 500;
+
+  background: radial-gradient(
+    ellipse 200% 100% at 50% 100%,
+    rgba(240, 253, 255, 0.1) 0%,
+    rgba(220, 240, 255, 0.15) 50%,
+    rgba(193, 217, 255, 0.2) 90%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
+
+button:active {
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #72eaff 0%,
+      #4680ff 50%,
+      #105cff 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #5fc5dd 0%,
+      #285dcc 50%,
+      #00329c 100%
+    ) border-box;
+}
+
+#criticalbutton {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #ff94c1 0%,
+      #ff5f7a 50%,
+      #ff1d1d 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #dd5fbe 0%,
+      #cc287a 50%,
+      #9c0000 100%
+    ) border-box;
+}
+
+#criticalbutton span {
+  color: black;
+  padding: 0 12px;
+  border-radius: 4px;
+
+  font-weight: 500;
+
+  background: radial-gradient(
+    ellipse 200% 100% at 50% 100%,
+    rgba(255, 203, 225, 0.1) 0%,
+    rgba(255, 182, 194, 0.15) 50%,
+    rgba(255, 171, 171, 0.2) 90%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
+
+#criticalbutton:active {
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #f272a7 0%,
+      #fe3b5c 50%,
+      #ff0303 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #dd5fbe 0%,
+      #cc287a 50%,
+      #9c0000 100%
+    ) border-box;
+}
+
+#standardbutton {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #ffffff 0%,
+      #d7d7d7 50%,
+      #b4b4b4 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #bababa 0%,
+      #9b9b9b 50%,
+      #636363 100%
+    ) border-box;
+}
+
+#standardbutton span {
+  color: black;
+  padding: 0 12px;
+  border-radius: 4px;
+
+  font-weight: 500;
+
+  background: radial-gradient(
+    ellipse 200% 100% at 50% 100%,
+    rgba(213, 213, 213, 0.1) 0%,
+    rgba(178, 178, 178, 0.15) 50%,
+    rgba(112, 112, 112, 0.2) 90%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+}
+
+#standardbutton:active {
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #c4c4c4 0%,
+      #a1a0a0 50%,
+      #5d5d5d 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #a1a1a1 0%,
+      #707070 50%,
+      #202020 100%
+    ) border-box;
+}
+
+#setlistdropdown {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  font-weight: 500;
+  padding: 1px 12px;
+
+  background: radial-gradient(
+    ellipse 200% 100% at 50% 100%,
+    rgba(213, 213, 213, 0.1) 0%,
+    rgba(178, 178, 178, 0.15) 50%,
+    rgba(112, 112, 112, 0.2) 90%,
+    rgba(255, 255, 255, 0.85) 100%
+  ),
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #ffffff 0%,
+      #d7d7d7 50%,
+      #b4b4b4 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #bababa 0%,
+      #9b9b9b 50%,
+      #636363 100%
+    ) border-box;
+}
+
+#setlistdropdown:focus {
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #c4c4c4 0%,
+      #a1a0a0 50%,
+      #5d5d5d 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #a1a1a1 0%,
+      #707070 50%,
+      #202020 100%
+    ) border-box;
+}
+
+input[type="text"] {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 999px;
+  /* padding: 10px 12px; */
+  padding: 4px 6px;
+
+  /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2); */
+}
+
+input:focus {
+  outline: none;
+}
+
+h1 {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+li {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+#upload-song {
+  display: none;
+}
+
+.audioPlayer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: system-ui;
+}
+
+.audioPlayer button {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #ffffff 0%,
+      #d7d7d7 50%,
+      #b4b4b4 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #bababa 0%,
+      #9b9b9b 50%,
+      #636363 100%
+    ) border-box;
+}
+
+.audioPlayer button:active {
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #c4c4c4 0%,
+      #a1a0a0 50%,
+      #5d5d5d 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #a1a1a1 0%,
+      #707070 50%,
+      #202020 100%
+    ) border-box;
+}
+
+/* remove white background from tracks */
+input[type="range"] {
+  appearance: none;
+  background: transparent;
+}
+
+.audioPlayer input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+
+  background:
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      #ffffff 0%,
+      #d7d7d7 50%,
+      #b4b4b4 100%
+    ) padding-box,
+
+    radial-gradient(
+      ellipse 90% 100% at 50% 100%,
+      #bababa 0%,
+      #9b9b9b 50%,
+      #636363 100%
+    ) border-box;
+}
+
+.audioPlayer input[type="range"]::-moz-range-thumb {
+  background:
+
+  radial-gradient(
+    ellipse 75% 50% at 50% 60%,
+    rgba(213, 213, 213, 0.1) 0%,
+    rgba(178, 178, 178, 0.15) 50%,
+    rgba(112, 112, 112, 0.2) 90%,
+    rgba(255, 255, 255, 0.85) 100%
+  ) padding-box,
+
+  radial-gradient(
+    ellipse 100% 100% at 50% 100%,
+    #ffffff 0%,
+    #d7d7d7 50%,
+    #b4b4b4 100%
+  ) padding-box,
+
+  radial-gradient(
+    ellipse 90% 100% at 50% 100%,
+    #bababa 0%,
+    #9b9b9b 50%,
+    #636363 100%
+  ) border-box;
+}
+
+.audioPlayer input[type="range"]::-webkit-slider-runnable-track {
+  appearance: none;
+  height: 6px;
+  background: linear-gradient(#b4b4b4, #d7d7d7);
+  border-radius: 999px;
+}
+
+.audioPlayer input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: linear-gradient(#b4b4b4, #d7d7d7);
+  border-radius: 999px;
+}
+
+ol {
+  background: white;
+  border: 1px solid #d5d5d5;
+  list-style-position: inside;
+  padding: 0px 0px;
+}
+
+ul {
+  background: white;
+  border: 1px solid #d5d5d5;
+  list-style-position: inside;
+  padding: 0px 0px;
+}
+
+li:nth-child(odd) {
+  background: #f0f0f0;
+  padding: 0px 4px;
+}
+
+li:nth-child(even) {
+  background: #fff;
+  padding: 0px 4px;
 }

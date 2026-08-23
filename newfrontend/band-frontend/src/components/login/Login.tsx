@@ -44,7 +44,9 @@ function Login() {
                 Password: <input name="passwordInput" type="password" />
             </label> {" "}
 
-            <button type="submit">Login</button>
+            <button type="submit">
+                <span>Login</span>
+            </button>
         </form>
     );
 }

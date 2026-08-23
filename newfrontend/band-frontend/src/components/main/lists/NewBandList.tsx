@@ -26,7 +26,7 @@ function NewBandList({ bands, selectedBandID, getBandsFromContext, selectBandFor
     return (
         <>
             <label>Select Band:</label>{" "}
-            <select name="banddropdown" id="banddropdown" onChange={selectBand} value={selectedBandID}>
+            <select name="banddropdown" id="setlistdropdown" onChange={selectBand} value={selectedBandID}>
                 {(bands ?? []).map((band) => (
                     <option key={band.id} value={band.id}>{band.name}</option>
                 ))}

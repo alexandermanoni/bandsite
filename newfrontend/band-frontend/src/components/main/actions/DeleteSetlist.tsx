@@ -16,7 +16,9 @@ function DeleteSetlist({ deleteSetlist }: DeleteSetlistProps) {
     }
     return (
         <>
-            <button type="button" onClick={handleDelete}>Delete Current Setlist</button>
+            <button id="criticalbutton" type="button" onClick={handleDelete}>
+                <span>Delete Current Setlist</span>
+            </button>
         </>
     );
 }

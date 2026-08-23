@@ -16,7 +16,9 @@ function DeleteBand({ deleteBand }: DeleteBandProps) {
     }
     return (
         <>
-            <button type="button" onClick={handleDelete}>Delete Current Band</button>
+            <button id="criticalbutton" type="button" onClick={handleDelete}>
+                <span>Delete Current Band</span>
+            </button>
         </>
     );
 }

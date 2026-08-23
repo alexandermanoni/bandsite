@@ -75,8 +75,10 @@ function Signup() {
             <label>
                 Confirm Password: <input name="verifyPasswordInput" type="password" />
             </label>
-
-            <button type="submit">Signup</button>
+            {" "}
+            <button type="submit">
+                <span>Signup</span>
+            </button>
         </form>
     );
 }

@@ -1,6 +1,7 @@
 import type { Song } from "../../navigation/NewContextManagement";
 import DeleteSong from "../actions/DeleteSong";
 import NewUploadSong from "../actions/NewUploadSong";
+import AudioPlayer from "../tools/AudioPlayer";
 
 type NewSongListProps = {
     songs: Song[];
@@ -21,15 +22,14 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong }: 
                         {" "}
                         {song.name}
                         {" "}
-                        <button type="button" onClick={() => addSongToSetlist(song.id)}>Add</button>
+                        <button id="standardbutton" type="button" onClick={() => addSongToSetlist(song.id)}>
+                            <span>Add</span>
+                        </button>
                         {" "}
                         {
                             song.sourcefile
                             ? (
-                                <audio controls>
-                                    <source src={song.sourcefile} />
-                                    Your browser doesn't support audio playback.
-                                </audio>
+                                <AudioPlayer src={song.sourcefile} />
                             )
                             : (
                                 <NewUploadSong song={song} uploadSongSource={uploadSongSource}/>

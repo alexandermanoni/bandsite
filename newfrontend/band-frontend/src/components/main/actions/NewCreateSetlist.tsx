@@ -28,8 +28,10 @@ function NewCreateSetlist({ createSetlistForContext }: NewCreateSetlistProps) {
             <label>
                 New Setlist Name: <input name="setlistNameInput" type="text" />
             </label>
-
-            <button type="submit">Create Setlist</button>
+            {" "}
+            <button type="submit">
+                <span>Create Setlist</span>
+            </button>
         </form>
     );
 }
