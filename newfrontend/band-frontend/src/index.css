@@ -207,6 +207,14 @@ button:active {
       #a1a1a1 0%,
       #707070 50%,
       #202020 100%
+    ) border-box,
+
+    radial-gradient(
+      ellipse 200% 100% at 50% 100%,
+      rgba(163, 163, 163, 0.1) 0%,
+      rgba(124, 124, 124, 0.15) 50%,
+      rgba(79, 79, 79, 0.2) 90%,
+      rgba(255, 255, 255, 0.85) 100%
     ) border-box;
 }
 
@@ -218,26 +226,20 @@ button:active {
   font-weight: 500;
   padding: 1px 12px;
 
-  background: radial-gradient(
+  background: 
+  radial-gradient(
     ellipse 200% 100% at 50% 100%,
     rgba(213, 213, 213, 0.1) 0%,
     rgba(178, 178, 178, 0.15) 50%,
     rgba(112, 112, 112, 0.2) 90%,
     rgba(255, 255, 255, 0.85) 100%
-  ),
-    radial-gradient(
-      ellipse 200% 100% at 50% 100%,
-      #ffffff 0%,
-      #d7d7d7 50%,
-      #b4b4b4 100%
-    ) padding-box,
-
-    radial-gradient(
-      ellipse 90% 100% at 50% 100%,
-      #bababa 0%,
-      #9b9b9b 50%,
-      #636363 100%
-    ) border-box;
+  ) padding-box,
+  radial-gradient(
+    ellipse 90% 100% at 50% 100%,
+    #ffffff 0%,
+    #d7d7d7 50%,
+    #b4b4b4 100%
+  ) border-box;
 }
 
 #setlistdropdown:focus {
@@ -347,27 +349,34 @@ input[type="range"] {
 }
 
 .audioPlayer input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
+  /* appearance: none; */
 
   background:
-    radial-gradient(
-      ellipse 200% 100% at 50% 100%,
-      #ffffff 0%,
-      #d7d7d7 50%,
-      #b4b4b4 100%
-    ) padding-box,
+  radial-gradient(
+    ellipse 75% 50% at 50% 60%,
+    rgba(213, 213, 213, 0.1) 0%,
+    rgba(178, 178, 178, 0.15) 50%,
+    rgba(112, 112, 112, 0.2) 90%,
+    rgba(255, 255, 255, 0.85) 100%
+  ) padding-box,
 
-    radial-gradient(
-      ellipse 90% 100% at 50% 100%,
-      #bababa 0%,
-      #9b9b9b 50%,
-      #636363 100%
-    ) border-box;
+  radial-gradient(
+    ellipse 100% 100% at 50% 100%,
+    #ffffff 0%,
+    #d7d7d7 50%,
+    #b4b4b4 100%
+  ) padding-box,
+
+  radial-gradient(
+    ellipse 90% 100% at 50% 100%,
+    #bababa 0%,
+    #9b9b9b 50%,
+    #636363 100%
+  ) border-box;
 }
 
 .audioPlayer input[type="range"]::-moz-range-thumb {
   background:
-
   radial-gradient(
     ellipse 75% 50% at 50% 60%,
     rgba(213, 213, 213, 0.1) 0%,
@@ -407,15 +416,35 @@ input[type="range"] {
 ol {
   background: white;
   border: 1px solid #d5d5d5;
-  list-style-position: inside;
-  padding: 0px 0px;
+  counter-reset: song;
+  list-style: none;
+  padding: 0;
+}
+
+ol > li {
+  counter-increment: song;
+  display: flex;
+  align-items: center;
+  min-height: 26px;
+}
+
+ul > li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+}
+
+ol > li::before {
+  content: counter(song) ".";
+  margin-right: 8px;
 }
 
 ul {
   background: white;
   border: 1px solid #d5d5d5;
-  list-style-position: inside;
   padding: 0px 0px;
+  list-style: none;
 }
 
 li:nth-child(odd) {
@@ -426,4 +455,53 @@ li:nth-child(odd) {
 li:nth-child(even) {
   background: #fff;
   padding: 0px 4px;
+}
+
+#buttongroup {
+  margin-left: auto;
+  gap: 8px;
+}
+
+#listrow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+form label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 8px;
+}
+
+form input {
+  flex: 1;
+  min-width: 0;
+}
+
+form button {
+  flex-shrink: 0;
+}
+
+#setlistoptions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#songname {
+  flex: 1;
+  min-width: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -27,19 +27,24 @@ function NewSetlistSongsList({ songs, songpositions, moveSongUp, moveSongDown, r
                         <li
                             key={song.id}
                         >
-                            {song.name}
-                            {" "}
-                            <button id="standardbutton" type="button" onClick={() => moveSongUp(song.id)}>
-                                <span>Up</span>
-                            </button>
-                            {" / "}
-                            <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
-                                <span>Down</span>
-                            </button>
-                            {" "}
-                            <button id="standardbutton" type="button" onClick={() => removeSong(song.id)}>
-                                <span>Remove</span>
-                            </button>
+                            <div id="listrow">
+                                <span id="songname">
+                                    {song.name}
+                                </span>
+                                <span id="buttongroup">
+                                    <button id="standardbutton" type="button" onClick={() => moveSongUp(song.id)}>
+                                        <span>Up</span>
+                                    </button>
+                                    {" / "}
+                                    <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
+                                        <span>Down</span>
+                                    </button>
+                                    {" "}
+                                    <button id="standardbutton" type="button" onClick={() => removeSong(song.id)}>
+                                        <span>Remove</span>
+                                    </button>
+                                </span>
+                            </div>
                         </li>
                     ))}
             </ol>

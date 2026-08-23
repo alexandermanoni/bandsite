@@ -26,7 +26,7 @@ function NewCreateBand({ createBandForContext }: NewCreateBandProps) {
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                New Band Name: <input name="bandNameInput" type="text" />
+                New Band: <input name="bandNameInput" type="text" />
             </label>
             {" "}
             <button type="submit">

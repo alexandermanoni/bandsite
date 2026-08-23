@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Song } from "../../navigation/NewContextManagement";
 import DeleteSong from "../actions/DeleteSong";
 import NewUploadSong from "../actions/NewUploadSong";
@@ -11,6 +12,8 @@ type NewSongListProps = {
 }
 
 function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong }: NewSongListProps) {
+    const [playingSong, setPlayingSong] = useState("");
+
     return (
         <>
             <ul>
@@ -19,25 +22,36 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong }: 
                         key={song.id}
                     >
                         <DeleteSong songid={song.id} deleteSong={deleteSong} />
-                        {" "}
-                        {song.name}
-                        {" "}
-                        <button id="standardbutton" type="button" onClick={() => addSongToSetlist(song.id)}>
-                            <span>Add</span>
-                        </button>
-                        {" "}
-                        {
-                            song.sourcefile
-                            ? (
-                                <AudioPlayer src={song.sourcefile} />
-                            )
-                            : (
-                                <NewUploadSong song={song} uploadSongSource={uploadSongSource}/>
-                            )
-                        }
+                        <span id="songname">
+                            {song.name}
+                        </span>
+                        <div id="buttongroup">
+                            <button id="standardbutton" type="button" onClick={() => addSongToSetlist(song.id)}>
+                                <span>Add</span>
+                            </button>
+                            {" "}
+                            {
+                                song.sourcefile
+                                ? (
+                                    <button 
+                                        id="standardbutton"
+                                        onClick={() => {
+                                            setPlayingSong(song.sourcefile)
+                                        }}
+                                    >
+                                        <span>Play Audio File</span>
+                                    </button>
+                                )
+                                : (
+                                    <NewUploadSong song={song} uploadSongSource={uploadSongSource}/>
+                                )
+                            }
+                        </div>
                     </li>
                 ))}
             </ul>
+
+            <AudioPlayer src={playingSong} />
         </>
     );
 }

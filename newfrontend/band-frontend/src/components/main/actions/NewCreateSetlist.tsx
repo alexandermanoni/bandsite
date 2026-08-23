@@ -26,7 +26,7 @@ function NewCreateSetlist({ createSetlistForContext }: NewCreateSetlistProps) {
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                New Setlist Name: <input name="setlistNameInput" type="text" />
+                New Setlist: <input name="setlistNameInput" type="text" />
             </label>
             {" "}
             <button type="submit">

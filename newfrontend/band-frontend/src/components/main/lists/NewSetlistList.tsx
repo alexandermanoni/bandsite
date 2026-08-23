@@ -14,7 +14,7 @@ function NewSetlistList({ setlists, selectedSetlistID, selectSetlistForContext }
 
     return (
         <>
-            <label>Select Setlist:</label>{" "}
+            <label>Current Setlist:</label>{" "}
             <select name="setlistdropdown" id="setlistdropdown" onChange={selectSetlist} value={selectedSetlistID}>
                 {(setlists ?? []).map((setlist) => (
                     <option key={setlist.id} value={setlist.id}>

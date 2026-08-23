@@ -85,11 +85,23 @@ function AudioPlayer({ src }: AudioPlayerProps) {
     <div className="audioPlayer">
       <audio ref={audioRef} src={src} />
 
-      <button onClick={togglePlay}>
-        <span>
-          {playing ? "Pause" : "Play"}
-        </span>
-      </button>
+      {
+        src === ""
+          ? (
+            <button onClick={() => { } }>
+              <span>
+                No Song
+              </span>
+            </button>
+          )
+          : (
+            <button onClick={togglePlay}>
+              <span>
+                {playing ? "Pause" : "Play"}
+              </span>
+            </button>
+          )
+      }
 
       <span>{formatTime(currentTime)}</span>
 

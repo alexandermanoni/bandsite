@@ -26,7 +26,7 @@ function NewCreateSong({ createSongForContext }: NewCreateSongProps) {
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                New Song Name: <input name="songNameInput" type="text" />
+                New Song: <input name="songNameInput" type="text" />
             </label>
             {" "}
             <button type="submit">

@@ -34,11 +34,11 @@ export function NewMainPage() {
                     {" "}
                     <DeleteSetlist deleteSetlist={context.deleteCurrentSetlist} />
                     <NewSetlistSongsList songs={context.contextState.songs} songpositions={context.contextState.songpositions} moveSongUp={context.moveSongUp} moveSongDown={context.moveSongDown} removeSong={context.removeSongFromSetlist} />
-                    <NewSaveSetlist savesetlist={context.uploadSetlist} />
-                    {" "}
-                    <ExportToPdf exporttopdf={context.getSetlistPdf} />
-                    {" "}
-                    <ExportToZip exporttozip={context.getSetlistZip} />
+                    <div id="setlistoptions">
+                        <NewSaveSetlist savesetlist={context.uploadSetlist} />
+                        <ExportToPdf exporttopdf={context.getSetlistPdf} />
+                        <ExportToZip exporttozip={context.getSetlistZip} />
+                    </div>
                 </div>
             </div>
         </>
