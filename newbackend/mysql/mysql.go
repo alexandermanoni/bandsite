@@ -23,6 +23,8 @@ func (db *DB) DBInit() {
 	// db.cfg.Addr = os.Getenv("SQLCONNECT")
 	//db.cfg.Addr = "127.0.0.1:3306"
 	db.cfg.DBName = "bandsite"
+	// parse dates for stuff like refresh tokens, rather than return byte slices
+	db.cfg.ParseTime = true
 
 	var err error
 	db.db, err = sql.Open("mysql", db.cfg.FormatDSN())
