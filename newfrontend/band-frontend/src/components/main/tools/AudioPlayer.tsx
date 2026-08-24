@@ -106,6 +106,7 @@ function AudioPlayer({ src }: AudioPlayerProps) {
       <span>{formatTime(currentTime)}</span>
 
       <input
+        id="songtimeline"
         type="range"
         min="0"
         max={duration}
@@ -116,6 +117,7 @@ function AudioPlayer({ src }: AudioPlayerProps) {
       <span>{formatTime(duration)}</span>
 
       <input
+      id="songvolume"
         type="range"
         min="0"
         max="1"

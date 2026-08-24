@@ -261,7 +261,7 @@ func (s *Server) loginUser(c *gin.Context) {
 		refreshtoken,
 		60*60*24*30, // 30 days
 		"/auth",
-		"",
+		"setlistcreationutility.com",
 		true, // secure
 		true, // http only
 	)

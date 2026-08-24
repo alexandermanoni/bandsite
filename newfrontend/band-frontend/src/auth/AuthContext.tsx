@@ -134,6 +134,7 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                 // no refresh token either
                 if (!response.ok) {
                     authStorage.clearToken();
+                    setAuthenticated(false);
 
                     return;
                 }
@@ -158,7 +159,7 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
         }
 
         initializeAuthentication();
-    }, [])
+    }, []);
 
     return (
         <AuthContext.Provider
