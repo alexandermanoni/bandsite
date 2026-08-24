@@ -256,15 +256,25 @@ func (s *Server) loginUser(c *gin.Context) {
 	}
 
 	// return refresh token as HttpsOnly cookie
-	c.SetCookie(
-		"refresh_token",
-		refreshtoken,
-		60*60*24*30, // 30 days
-		"/auth",
-		"setlistcreationutility.com",
-		true, // secure
-		true, // http only
-	)
+	cookie := &http.Cookie{
+		Name:     "refresh_token",
+		Value:    refreshtoken,
+		Path:     "/auth",
+		MaxAge:   60 * 60 * 24 * 30,
+		Secure:   true,
+		HttpOnly: true,
+		SameSite: http.SameSiteNoneMode,
+	}
+	http.SetCookie(c.Writer, cookie)
+	// c.SetCookie(
+	// 	"refresh_token",
+	// 	refreshtoken,
+	// 	60*60*24*30, // 30 days
+	// 	"/auth",
+	// 	"setlistcreationutility.com",
+	// 	true, // secure
+	// 	true, // http only
+	// )
 
 	// return JWT access token
 	c.JSON(http.StatusOK, gin.H{
