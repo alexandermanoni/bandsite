@@ -4,7 +4,8 @@
 import { authStorage } from "../auth/authStorage";
 
 //const siteurl = "http://localhost:8080/api/";
-const siteurl = "https://bandsite-service-943772568820.us-central1.run.app/api/";
+//const siteurl = "https://bandsite-service-943772568820.us-central1.run.app/api/";
+const siteurl = "https://api.setlistcreationutility.com/api/";
 
 export async function apiFetch(
     url: string,
@@ -42,7 +43,8 @@ export async function apiFetch(
 
     // try refresh token
     const refreshResponse = await fetch(
-        "https://bandsite-service-943772568820.us-central1.run.app/auth",
+        "https://api.setlistcreationutility.com/auth",
+        //"https://bandsite-service-943772568820.us-central1.run.app/auth",
         //"http://localhost:8080/auth",
         {
             method: "POST",
