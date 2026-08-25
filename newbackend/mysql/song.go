@@ -183,7 +183,7 @@ func uploadSong(ctx *gin.Context, tx *sql.Tx, userid int, songid int, songfile *
 
 	// file not already stored
 	if !exists {
-		destination := filepath.Join("/mnt/songpath", hash)
+		destination := filepath.Join("/songpath", hash)
 
 		if err := ctx.SaveUploadedFile(songfile, destination); err != nil {
 			return err
