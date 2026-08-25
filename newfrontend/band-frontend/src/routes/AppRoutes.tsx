@@ -6,11 +6,20 @@ import { NewMainPage } from "../pages/NewMainPage";
 import { useAuth } from "../auth/useAuth";
 
 function RootRedirect() {
-    const { authenticated } = useAuth();
+    const { initialized, authenticated } = useAuth();
 
-    return authenticated
-        ? <Navigate to="/home" replace />
-        : <Navigate to="/login" replace />;
+    console.log("Init: ", initialized);
+    console.log("Auth: ", authenticated);
+
+    if (!initialized) {
+        return <div>Loading...</div>
+    }
+
+    if (initialized && authenticated) {
+        return <Navigate to="/home" replace />;
+    }
+
+    return <Navigate to="/login" replace />;
 }
 
 export function AppRoutes() {

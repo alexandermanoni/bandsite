@@ -110,6 +110,7 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     // try to load auth token on startup
     useEffect(() => {
         async function initializeAuthentication() {
+            console.log("HERE!!!");
             // see if already have a token
             const existingToken = authStorage.getToken();
 
@@ -119,6 +120,8 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                 setAuthenticated(true);
                 return;
             }
+
+            console.log("HERE2");
 
             // no access token, try refresh
             try {
@@ -137,6 +140,8 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                     authStorage.clearToken();
                     setAuthenticated(false);
 
+                    console.log("HERE3");
+
                     return;
                 }
 
@@ -145,6 +150,8 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                 authStorage.setToken(data.accessToken);
 
                 setAuthenticated(true);
+
+                console.log("HERE4");
 
                 return;
             }
@@ -155,6 +162,7 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
             }
             finally {
                 // tried to authenticate
+                console.log("HERE5");
                 setInitialized(true);
             }
         }
