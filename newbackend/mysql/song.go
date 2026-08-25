@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
+	"os"
 	"path/filepath"
 
 	newbackend "example.com/bandsite"
@@ -185,11 +186,22 @@ func uploadSong(ctx *gin.Context, tx *sql.Tx, userid int, songid int, songfile *
 	if !exists {
 		destination := filepath.Join("/songpath", hash)
 
-		if err := ctx.SaveUploadedFile(songfile, destination); err != nil {
+		destinationfile, err := os.Create(destination)
+		if err != nil {
+			return err
+		}
+		defer destinationfile.Close()
+
+		_, err = io.Copy(destinationfile, file)
+		if err != nil {
 			return err
 		}
 
-		_, err := tx.ExecContext(ctx, `
+		// if err := ctx.SaveUploadedFile(songfile, destination); err != nil {
+		// 	return err
+		// }
+
+		_, err = tx.ExecContext(ctx, `
 			INSERT INTO songfiles (filehash, filepath) VALUES (?, ?)
 		`, hash, destination)
 		if err != nil {
