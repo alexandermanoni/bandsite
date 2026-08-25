@@ -184,6 +184,11 @@ func uploadSong(ctx *gin.Context, tx *sql.Tx, userid int, songid int, songfile *
 
 	// file not already stored
 	if !exists {
+		// reset to file beginning
+		if _, err := file.Seek(0, io.SeekStart); err != nil {
+			return err
+		}
+
 		destination := filepath.Join("/songpath", hash)
 
 		destinationfile, err := os.Create(destination)
