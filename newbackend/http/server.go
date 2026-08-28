@@ -40,6 +40,7 @@ func (s *Server) StartServer() {
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{
 		"http://localhost:5173",
+		"http://localhost:4173",
 		"https://setlistcreationutility.com",
 		"https://www.setlistcreationutility.com",
 	}

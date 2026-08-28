@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import type { Song } from "../../navigation/NewContextManagement";
 
 type NewUploadSongProps = {
@@ -6,8 +7,11 @@ type NewUploadSongProps = {
 }
 
 function NewUploadSong({ song, uploadSongSource }: NewUploadSongProps) {
-    function handleSubmit(event: React.ChangeEvent<HTMLInputElement>) {
-        event.preventDefault();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [loading, setLoading] = useState(false);
+
+    async function handleSubmit(event: React.ChangeEvent<HTMLInputElement>) {
+        // event.preventDefault();
 
         const file = event.target.files?.[0];
 
@@ -18,14 +22,28 @@ function NewUploadSong({ song, uploadSongSource }: NewUploadSongProps) {
         formData.append("songid", song.id);
         formData.append("songsource", file);
 
-        uploadSongSource(song, formData);
+        setLoading(true);
+
+        await uploadSongSource(song, formData);
+
+        setLoading(false);
     }
+
+    function handleClick() {
+        fileInputRef.current?.click();
+    }
+
     return (
         <>
-            <input id="upload-song" type="file" accept="audio/*" onChange={handleSubmit}/>
-            <button onClick={() => document.getElementById("upload-song")?.click()}>
-                <span>Upload Audio File</span>
+            <input id="upload-song" ref={fileInputRef} type="file" accept="audio/*" onChange={handleSubmit}/>
+            <button onClick={handleClick}>
+                {!loading && <span>Upload Audio File</span>}
+                {loading && <span>Uploading Audio File</span>}
+                {/* <span>Upload Audio File</span> */}
             </button>
+            {/* <button onClick={() => document.getElementById("upload-song")?.click()}>
+                <span>Upload Audio File</span>
+            </button> */}
         </>
     );
 }

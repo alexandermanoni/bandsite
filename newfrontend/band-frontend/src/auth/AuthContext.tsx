@@ -21,8 +21,8 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     const [authenticated, setAuthenticated] = useState(false);
 
     async function login(email: string, password: string) {        
-        const response = await fetch("https://api.setlistcreationutility.com/login", { method: "POST", credentials: "include", body: JSON.stringify({ email, password }) });
-        
+        const response = await fetch(import.meta.env.VITE_LOGIN_URL, { method: "POST", credentials: "include", body: JSON.stringify({ email, password }) });
+        // const response = await fetch("https://api.setlistcreationutility.com/login", { method: "POST", credentials: "include", body: JSON.stringify({ email, password }) });        
         //const response = await fetch("https://bandsite-service-943772568820.us-central1.run.app/login", { method: "POST", credentials: "include", body: JSON.stringify({ email, password }) });
         // const response = await fetch("http://localhost:8080/login", { method: "POST", body: JSON.stringify({ email, password }) });
 
@@ -49,7 +49,8 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     }
 
     async function signup(email: string, password: string, verifypassword: string) {        
-        const response = await fetch("https://api.setlistcreationutility.com/signup", { method: "POST", credentials: "include", body: JSON.stringify({ email, password, verifypassword }) });
+        const response = await fetch(import.meta.env.VITE_SIGNUP_URL, { method: "POST", credentials: "include", body: JSON.stringify({ email, password, verifypassword }) });
+        // const response = await fetch("https://api.setlistcreationutility.com/signup", { method: "POST", credentials: "include", body: JSON.stringify({ email, password, verifypassword }) });
         // const response = await fetch("https://bandsite-service-943772568820.us-central1.run.app/signup", { method: "POST", credentials: "include", body: JSON.stringify({ email, password, verifypassword }) });
         // const response = await fetch("http://localhost:8080/signup", { method: "POST", body: JSON.stringify({ email, password, verifypassword }) });
 
@@ -87,7 +88,8 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     }
 
     async function logout() {
-        const response = await fetch("https://api.setlistcreationutility.com/logout", { method: "POST" });
+        const response = await fetch(import.meta.env.VITE_LOGOUT_URL, { method: "POST" });
+        // const response = await fetch("https://api.setlistcreationutility.com/logout", { method: "POST" });
         // const response = await fetch("https://bandsite-service-943772568820.us-central1.run.app/logout", { method: "POST" });
         // const response = await fetch("http://localhost:8080/logout", { method: "POST" });
 
@@ -110,7 +112,6 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
     // try to load auth token on startup
     useEffect(() => {
         async function initializeAuthentication() {
-            console.log("HERE!!!");
             // see if already have a token
             const existingToken = authStorage.getToken();
 
@@ -121,12 +122,11 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                 return;
             }
 
-            console.log("HERE2");
-
             // no access token, try refresh
             try {
                 const response = await fetch(
-                    "https://api.setlistcreationutility.com/auth",
+                    import.meta.env.VITE_AUTH_URL,
+                    // "https://api.setlistcreationutility.com/auth",
                     // "https://bandsite-service-943772568820.us-central1.run.app/auth",
                     // "http://localhost:8080/auth",
                     {
@@ -140,8 +140,6 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                     authStorage.clearToken();
                     setAuthenticated(false);
 
-                    console.log("HERE3");
-
                     return;
                 }
 
@@ -150,8 +148,6 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
                 authStorage.setToken(data.accessToken);
 
                 setAuthenticated(true);
-
-                console.log("HERE4");
 
                 return;
             }
@@ -162,7 +158,6 @@ export function AuthProvider({ children }: { children: React.ReactNode; }) {
             }
             finally {
                 // tried to authenticate
-                console.log("HERE5");
                 setInitialized(true);
             }
         }
