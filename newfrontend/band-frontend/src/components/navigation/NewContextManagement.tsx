@@ -96,7 +96,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
             selectedSetlistID: "",
         });
 
-        return contextState.bands;
+        return result;
     }
 
     async function getSetlistPdf() {
