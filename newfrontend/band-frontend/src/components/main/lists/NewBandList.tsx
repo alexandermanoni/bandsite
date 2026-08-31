@@ -3,7 +3,7 @@ import type { GenericItem } from "../../navigation/NewContextManagement"
 
 type NewBandListProps = {
     bands: GenericItem[];
-    selectedBandID: string;
+    selectedBandID: string | null;
     getBandsFromContext: () => Promise<GenericItem[]>;
     selectBandForContext: (id: string) => void;
 }
@@ -26,7 +26,7 @@ function NewBandList({ bands, selectedBandID, getBandsFromContext, selectBandFor
     return (
         <>
             <label>Current Band:</label>{" "}
-            <select name="banddropdown" id="setlistdropdown" onChange={selectBand} value={selectedBandID}>
+            <select name="banddropdown" id="setlistdropdown" onChange={selectBand} value={selectedBandID!}>
                 {(bands ?? []).map((band) => (
                     <option key={band.id} value={band.id}>{band.name}</option>
                 ))}

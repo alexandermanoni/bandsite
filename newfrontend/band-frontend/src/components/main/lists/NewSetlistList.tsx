@@ -2,7 +2,7 @@ import type { GenericItem } from "../../navigation/NewContextManagement"
 
 type NewSetlistListProps = {
     setlists: GenericItem[];
-    selectedSetlistID: string;
+    selectedSetlistID: string | null;
     selectSetlistForContext: (id: string) => void;
 }
 
@@ -15,7 +15,7 @@ function NewSetlistList({ setlists, selectedSetlistID, selectSetlistForContext }
     return (
         <>
             <label>Current Setlist:</label>{" "}
-            <select name="setlistdropdown" id="setlistdropdown" onChange={selectSetlist} value={selectedSetlistID}>
+            <select name="setlistdropdown" id="setlistdropdown" onChange={selectSetlist} value={selectedSetlistID!}>
                 {(setlists ?? []).map((setlist) => (
                     <option key={setlist.id} value={setlist.id}>
                         {setlist.name}
