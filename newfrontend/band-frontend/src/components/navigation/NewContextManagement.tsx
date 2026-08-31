@@ -58,8 +58,6 @@ export type ContextState = {
 export const MainContext = createContext<ContextState>(null!);
 
 export function ContextProvider({ children }: { children: React.ReactNode; }) {
-    //const { user } = useAuth();
-
     const [contextState, setContextState] = useState<ContextModel>({
         bands: [],
         songs: [],
