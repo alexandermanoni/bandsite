@@ -170,7 +170,10 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
 
                 if (!response.ok) return;
 
-                song.sourcefile = URL.createObjectURL(await response.blob());
+                return {
+                    ...song,
+                    sourcefile: URL.createObjectURL(await response.blob())
+                }
             })
         );
 
