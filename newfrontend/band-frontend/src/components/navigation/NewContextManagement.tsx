@@ -240,7 +240,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         const exists = contextState.bands.some(band => band.id == id);
 
         // don't do anything if doesn't exist or is already selected
-        if (!exists || id == contextState.selectedBandID) {
+        if (!exists || id === contextState.selectedBandID) {
             return;
         }
 
@@ -260,7 +260,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
     function selectSetlist(id: string) {
         const exists = contextState.setlists.some(setlist => setlist.id == id);
 
-        if (!exists || id == contextState.selectedSetlistID) {
+        if (!exists || id === contextState.selectedSetlistID) {
             return;
         }
 
@@ -532,7 +532,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
     useEffect(() => {
         if (contextState.bands == null) return;
 
-        if (contextState.bands.length > 0 && contextState.selectedBandID == "") {
+        if (contextState.bands.length > 0 && contextState.selectedBandID === "") {
             setContextState((prev) => ({
                 ...prev,
                 selectedBandID: contextState.bands[0].id
@@ -542,7 +542,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
 
     useEffect(() => {
         const load = async () => {
-            if (contextState.selectedSetlistID == "") {
+            if (contextState.selectedSetlistID === "") {
                 return;
             }
 
@@ -552,7 +552,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
     }, [contextState.selectedSetlistID]);
 
     useEffect(() => {
-        if (contextState.setlists.length > 0 && contextState.selectedSetlistID == "") {
+        if (contextState.setlists.length > 0 && contextState.selectedSetlistID === "") {
             setContextState((prev) => ({
                 ...prev,
                 selectedSetlistID: prev.setlists[0].id
