@@ -7,57 +7,30 @@ type NewCreateBandProps = {
 function NewCreateBand({ createBandForContext }: NewCreateBandProps) {
     const [creating, setCreating] = useState(false);
 
-    async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
-        event.preventDefault();
+    async function handleCreateBand() {
+        const bandName = prompt("Enter a name for the new band:");
 
-        const form = event.target;
-        const formData = new FormData(form);
+        // user cancelled or input an empty name
+        if (!bandName || bandName?.trim() == "") return;
 
-        // if form busted somehow
-        if (!formData.get("bandNameInput")) return;
-
-        const name = formData.get("bandNameInput")!.toString();
-
-        // empty name
-        if (name == "") return;
-
-        createBandForContext(name);
-
-        // reset 
-        event.currentTarget.reset();
+        setCreating(true);
+        await createBandForContext(bandName!);
+        setCreating(false);
     }
 
     return (
         <>
-            <button onClick={() => {
-                const testval = prompt("Enter testval: ");
-
-                console.log("VAL: ", testval);
-            }}>
-                Test Prompt
-            </button>
             {
-                creating && 
-                <form onSubmit={handleSubmit}>
-                <label>
-                    New Band: <input name="bandNameInput" type="text" />
-                </label>
-                {" "}
-                <button className="postbutton" type="submit">
-                    <div className="buttonlabel">
-                        Create Band
+                creating &&
+                <button onClick={() => {}}>
+                    <div>
+                        Creating...
                     </div>
                 </button>
-                <button onClick={() => setCreating(false)}>
-                    <div className="buttonlabel">
-                        Cancel
-                    </div>
-                </button>
-            </form>
             }
             {
-                !creating && 
-                <button onClick={() => setCreating(true)} style={{ justifySelf: "right" }}>
+                !creating &&
+                <button className="postbutton" onClick={handleCreateBand}>
                     <div className="buttonlabel">
                         Create Band
                     </div>
