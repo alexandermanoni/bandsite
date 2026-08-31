@@ -20,12 +20,13 @@ export type SongPosition = {
 
 export interface ContextModel {
     readonly bands: GenericItem[];
-    readonly songs: Song[];
-    readonly setlists: GenericItem[];
-    readonly songpositions: SongPosition[];
+    readonly selectedBandID: string | null;
 
-    readonly selectedBandID: string;
-    readonly selectedSetlistID: string;
+    readonly songs: Song[];
+
+    readonly setlists: GenericItem[];
+    readonly selectedSetlistID: string | null;
+    readonly songpositions: SongPosition[];    
 }
 
 export type ContextState = {
@@ -298,7 +299,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
 
     async function createSong(name: string) {
         // create song
-        const requestBody = { bandid: contextState.selectedBandID.toString(), newsongname: name };
+        const requestBody = { bandid: contextState.selectedBandID?.toString(), newsongname: name };
         const response = await apiFetch("createsong", { method: "POST", body: JSON.stringify(requestBody) });
 
         if (!response.ok) {
@@ -320,7 +321,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
 
     async function createSetlist(name: string) {
         // create setlist
-        const requestBody = { bandid: contextState.selectedBandID.toString(), newsetlistname: name };
+        const requestBody = { bandid: contextState.selectedBandID?.toString(), newsetlistname: name };
         const response = await apiFetch("createsetlist", { method: "POST", body: JSON.stringify(requestBody) });
 
         if (!response.ok) {
@@ -363,7 +364,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
                 position: positions.get(song.id)!
             }));
 
-        const result = await apiFetch("uploadsongpositions", { method: "POST", body: JSON.stringify({ setlistid: contextState.selectedSetlistID.toString(), songpositions: combined })});
+        const result = await apiFetch("uploadsongpositions", { method: "POST", body: JSON.stringify({ setlistid: contextState.selectedSetlistID?.toString(), songpositions: combined })});
 
         if (!result.ok) return;
     }
@@ -378,7 +379,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
             return;
         }
 
-        const newbandlist = contextState.bands.filter(s => s.id.toString() !== contextState.selectedBandID.toString());
+        const newbandlist = contextState.bands.filter(s => s.id.toString() !== contextState.selectedBandID?.toString());
 
         setContextState((prev) => ({
             ...prev,
