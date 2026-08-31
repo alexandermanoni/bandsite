@@ -563,6 +563,18 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         }
     }, [contextState.setlists]);
 
+    // clean up object urls for song sources
+    useEffect(() => {
+        // return the cleanup function to run before songs updates
+        return () => {
+            for (const song of contextState.songs) {
+                if (song.sourcefile) {
+                    URL.revokeObjectURL(song.sourcefile);
+                }
+            }
+        };
+    }, [contextState.songs]);
+
     return (
         <MainContext.Provider
             value={{
