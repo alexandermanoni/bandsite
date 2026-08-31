@@ -143,9 +143,22 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
     }
 
     // get the songs a band has
+    let songReqController: AbortController | null; // AbortController for getSongs (testing)
     async function getSongs() {
+        // cancel old request for songs
+        songReqController?.abort();
+
+        // create new controller for this request
+        const currentController = new AbortController();
+        songReqController = currentController;
+
         // fetch song names and ids
-        const response = await apiFetch(`songs/${contextState.selectedBandID}`);
+        const response = await apiFetch(`songs/${contextState.selectedBandID}`, { signal: currentController.signal });
+
+        // reset controller only if this is the most recent request, don't make controller null if there is a newer fetch
+        if (songReqController === currentController) {
+            songReqController = null;
+        }
 
         if (!response.ok) {
             console.error("Failed to load songs for band: ", contextState.selectedBandID);
@@ -185,9 +198,19 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         }));
     }
 
+    let setlistReqController: AbortController | null;
     async function getSetlists() {
+        setlistReqController?.abort();
+
+        const currentController = new AbortController();
+        setlistReqController = currentController;
+
         // fetch setlist names and ids
-        const response = await apiFetch(`setlists/${contextState.selectedBandID}`);
+        const response = await apiFetch(`setlists/${contextState.selectedBandID}`, { signal: currentController.signal });
+
+        if (setlistReqController === currentController) {
+            setlistReqController = null;
+        }
 
         if (!response.ok) {
             console.error("Failed to load setlists for band: ", contextState.selectedBandID);
@@ -213,8 +236,18 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         }));
     }
 
+    let positionsReqController: AbortController | null;
     async function getSongPositions() {
+        positionsReqController?.abort();
+
+        const currentController = new AbortController();
+        positionsReqController = currentController;
+
         const response = await apiFetch(`songpositions/${contextState.selectedSetlistID}`);
+
+        if (positionsReqController === currentController) {
+            positionsReqController = null;
+        }
 
         if (!response.ok) {
             console.error("Failed to load songs for setlist: ", contextState.selectedSetlistID);
