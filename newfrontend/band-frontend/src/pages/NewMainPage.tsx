@@ -18,7 +18,7 @@ export function NewMainPage() {
 
     return (
         <>
-            <h1>Setlist Creation Utility</h1>
+            <h2>Setlist Creation Utility</h2>
             <div id="maincontent">
                 <div>
                     <NewCreateBand createBandForContext={context.createBand} />

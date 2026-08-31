@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 
-
 function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -36,16 +35,18 @@ function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form className="loginform" onSubmit={handleSubmit}>
+            <label className="inputfield">
                 Email: <input name="emailInput" type="email" />
             </label> {" "}
-            <label>
+            <label className="inputfield">
                 Password: <input name="passwordInput" type="password" />
             </label> {" "}
 
-            <button type="submit">
-                <span>Login</span>
+            <button className="inputfieldsubmit postbutton" type="submit">
+                <div className="buttonlabel">
+                    Log in
+                </div>
             </button>
         </form>
     );
