@@ -291,7 +291,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         // add new band without reloading
         setContextState((prev) => ({
             ...prev,
-            bands: [...contextState.bands, result],
+            bands: [...prev.bands, result],
             selectedBandID: result.id
         }));
     }
@@ -314,7 +314,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         // add new song without reloading
         setContextState((prev) => ({
             ...prev,
-            songs: [...contextState.songs, newsong]
+            songs: [...prev.songs, newsong]
         }));
     }
 
@@ -335,7 +335,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         // add new setlist without reloading
         setContextState((prev) => ({
             ...prev,
-            setlists: [...contextState.setlists, newsetlist],
+            setlists: [...prev.setlists, newsetlist],
             selectedSetlistID: newsetlist.id
         }));
     }
@@ -554,7 +554,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
         if (contextState.setlists.length > 0 && contextState.selectedSetlistID == "") {
             setContextState((prev) => ({
                 ...prev,
-                selectedSetlistID: contextState.setlists[0].id
+                selectedSetlistID: prev.setlists[0].id
             }));
         }
     }, [contextState.setlists]);
