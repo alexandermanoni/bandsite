@@ -1,3 +1,5 @@
+import { Trash2 } from "lucide-react";
+
 type DeleteBandProps = {
     deleteBand: () => Promise<void>;
 }
@@ -18,14 +20,8 @@ function DeleteBand({ deleteBand }: DeleteBandProps) {
         <>
             <button className="criticalbutton" onClick={handleDelete}>
                 <div className="buttonlabel">
-                    D
-                </div>
-                {/* <div className="buttonlabel desktopview">
-                    Delete Band
-                </div>
-                <div className="buttonlabel mobileview">
-                    D
-                </div> */}
+                    <Trash2 size={ "1rem" } />
+                </div>                
             </button>
         </>
     );

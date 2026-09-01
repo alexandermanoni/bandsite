@@ -6,10 +6,10 @@ function NewSaveSetlist({ savesetlist }: NewSaveSetlistProps) {
     return (
         <>
             <button className="postbutton desktopview" type="button" onClick={savesetlist}>
-                Save Setlist
+                <div className="buttonlabel">Save Setlist</div>
             </button>
             <button className="postbutton mobileview" type="button" onClick={savesetlist}>
-                Save
+                <div className="buttonlabel">Save</div>
             </button>
         </>
     );

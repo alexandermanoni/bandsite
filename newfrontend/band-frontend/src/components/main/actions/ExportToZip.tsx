@@ -4,8 +4,10 @@ type ExportToZipProps = {
 
 function ExportToZip({ exporttozip }: ExportToZipProps) {
     return (
-        <button id="standardbutton" type="button" onClick={exporttozip}>
-            <span>Download Setlist to ZIP</span>
+        <button type="button" onClick={exporttozip}>
+            <div className="buttonlabel">
+                Download Setlist to ZIP
+            </div>
         </button>
     );
 }

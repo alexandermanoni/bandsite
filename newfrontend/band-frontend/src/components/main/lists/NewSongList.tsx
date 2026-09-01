@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import type { Song } from "../../navigation/NewContextManagement";
 import DeleteSong from "../actions/DeleteSong";
 import NewUploadSong from "../actions/NewUploadSong";
+import { ArrowRightFromLine, EllipsisVertical } from "lucide-react";
 
 type NewSongListProps = {
     songs: Song[];
@@ -68,17 +69,21 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong, se
 
                         {/* Add song to setlist button */}
                         <button className="desktopview" type="button" onClick={() => addSongToSetlist(song.id)}>
-                            Add {"->"}
+                            Add <ArrowRightFromLine size={ "1rem" } />
                         </button>
                         <button className="mobileview" type="button" onClick={() => addSongToSetlist(song.id)}>
-                            Add
+                            <div className="buttonlabel">
+                                Add
+                            </div>                            
                         </button>
 
                         {/* Mobile options */}
                         <div className="mobileview optionscontainer" ref={optionsRef}>
                             <div className="mobileview">
                                 <button onClick={() => setDisplayOptions(song.id)}>
-                                    |
+                                    <div className="buttonlabel">
+                                        <EllipsisVertical size={ "1rem" } />
+                                    </div>
                                 </button>
                             </div>
 

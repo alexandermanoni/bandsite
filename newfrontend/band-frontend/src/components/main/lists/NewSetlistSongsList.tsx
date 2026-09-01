@@ -1,3 +1,4 @@
+import { ArrowBigDown, ArrowBigUp, Minus } from "lucide-react";
 import type { Song, SongPosition } from "../../navigation/NewContextManagement";
 
 type NewSetlistSongsListProps = {
@@ -32,20 +33,20 @@ function NewSetlistSongsList({ songs, songpositions, moveSongUp, moveSongDown, r
                                 {song.name}
                             </span>
                             <span className="buttongroup">
-                                    <button id="standardbutton" type="button" onClick={() => moveSongUp(song.id)}>
-                                        Up
-                                    </button>
-                                    {"/"}
-                                    <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
-                                        Down
-                                    </button>
-                                    <button className="desktopview" type="button" onClick={() => removeSong(song.id)}>
-                                        Remove
-                                    </button>
-                                    <button className="mobileview" type="button" onClick={() => removeSong(song.id)}>
-                                        -
-                                    </button>
-                                </span>
+                                <button id="standardbutton" type="button" onClick={() => moveSongUp(song.id)}>
+                                    <div className="buttonlabel"><ArrowBigUp size={"1rem"} /></div>
+                                </button>
+                                {"/"}
+                                <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
+                                    <div className="buttonlabel"><ArrowBigDown size={"1rem"} /></div>
+                                </button>
+                                <button className="desktopview" type="button" onClick={() => removeSong(song.id)}>
+                                    Remove
+                                </button>
+                                <button className="mobileview" type="button" onClick={() => removeSong(song.id)}>
+                                    <div className="buttonlabel"><Minus size={ "1rem" } /></div>
+                                </button>
+                            </span>
                         </li>
                     ))}
             </ol>

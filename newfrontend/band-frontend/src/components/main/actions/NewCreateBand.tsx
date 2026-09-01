@@ -1,3 +1,4 @@
+import { Hourglass, Plus } from "lucide-react";
 import { useState } from "react";
 
 type NewCreateBandProps = {
@@ -23,22 +24,22 @@ function NewCreateBand({ createBandForContext }: NewCreateBandProps) {
             {
                 creating &&
                 <button className="postbutton" onClick={() => {}}>
-                    <div className="buttonlabel desktopview">
+                    <div className="desktopview">
                         Creating...
                     </div>
-                    <div className="buttonlabel mobileview">
-                        @
+                    <div className="mobileview">
+                        <Hourglass size={ "1rem" } />
                     </div>
                 </button>
             }
             {
                 !creating &&
                 <button className="postbutton" onClick={handleCreateBand}>
-                    <div className="buttonlabel desktopview">
+                    <div className="desktopview buttonlabel">
                         Create Band
                     </div>
-                    <div className="buttonlabel mobileview">
-                        +
+                    <div className="mobileview buttonlabel">
+                        <Plus size={ "1rem" } />
                     </div>
                 </button>
             }

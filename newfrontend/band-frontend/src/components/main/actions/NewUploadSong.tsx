@@ -37,7 +37,7 @@ function NewUploadSong({ song, uploadSongSource }: NewUploadSongProps) {
         <>
             <input className="uploadsong" ref={fileInputRef} type="file" accept="audio/*" onChange={handleSubmit}/>
             { 
-                !loading && <button className="postbutton" onClick={handleClick}>Upload Audio File</button>
+                !loading && <button className="postbutton" onClick={handleClick}><div className="buttonlabel">Upload Audio File</div></button>
             }
             {
                 loading && <button onClick={() => {}}>Loading...</button>

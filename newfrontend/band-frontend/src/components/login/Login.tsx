@@ -44,9 +44,10 @@ function Login() {
             </label> {" "}
 
             <button className="inputfieldsubmit postbutton" type="submit">
-                <div className="buttonlabel">
+                Log in
+                {/* <div className="buttonlabel">
                     Log in
-                </div>
+                </div> */}
             </button>
         </form>
     );

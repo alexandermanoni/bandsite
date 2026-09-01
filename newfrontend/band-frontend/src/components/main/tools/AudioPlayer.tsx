@@ -1,3 +1,4 @@
+import { Pause, Play, Square, Volume2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface AudioPlayerProps {
@@ -90,12 +91,16 @@ function AudioPlayer({ src }: AudioPlayerProps) {
           src === ""
             ? (
               <button onClick={() => { }}>
-                No Song
+                <div className="buttonlabel">
+                  No Song
+                </div>                
               </button>
             )
             : (
               <button onClick={togglePlay}>
-                {playing ? "Pause" : "Play"}
+                <div className="buttonlabel">
+                  {playing ? "Pause" : "Play"}
+                </div>
               </button>
             )
         }
@@ -106,12 +111,16 @@ function AudioPlayer({ src }: AudioPlayerProps) {
           src === ""
             ? (
               <button onClick={() => { }}>
-                O
+                <div className="buttonlabel">
+                  <Square size={"1rem"} />
+                </div>
               </button>
             )
             : (
               <button onClick={togglePlay}>
-                {playing ? "||" : ">"}
+                <div className="buttonlabel">
+                  {playing ? <Pause size={"1rem"} /> : <Play size={"1rem"} />}
+                </div>
               </button>
             )
         }
@@ -141,7 +150,7 @@ function AudioPlayer({ src }: AudioPlayerProps) {
         onChange={changeVolume}
       />
 
-      <span className="desktopview">Volume</span>
+      <span className="desktopview"><Volume2 size={"1rem"} /></span>
     </div>
   );
 }

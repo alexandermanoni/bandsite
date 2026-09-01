@@ -4,8 +4,10 @@ type ExportToPdfProps = {
 
 function ExportToPdf({ exporttopdf }: ExportToPdfProps) {
     return (
-        <button id="standardbutton" type="button" onClick={exporttopdf}>
-            <span>Download Setlist to PDF</span>
+        <button type="button" onClick={exporttopdf}>
+            <div className="buttonlabel">
+                Download Setlist to PDF
+            </div>
         </button>
     );
 }

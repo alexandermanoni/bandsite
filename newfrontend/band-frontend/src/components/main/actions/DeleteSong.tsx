@@ -1,3 +1,5 @@
+import { Trash2 } from "lucide-react";
+
 type DeleteSongProps = {
     songid: string;
     deleteSong: (id: string) => Promise<void>;
@@ -17,13 +19,15 @@ function DeleteSong({ songid, deleteSong }: DeleteSongProps) {
     }
     return (
         <>
-            {/* <button type="button" onClick={() => deleteSong(songid)}>Delete</button> */}
             <button className="criticalbutton desktopview" type="button" onClick={() => handleDelete(songid)}>
-                D
+                <Trash2 size={ "1rem" }/>
             </button>
 
             <button className="criticalbutton mobileview" type="button" onClick={() => handleDelete(songid)}>
-                Delete
+                <div className="buttonlabel">
+                    <Trash2 size={"1rem"} />{" "}
+                    Delete
+                </div>                
             </button>
         </>
     );

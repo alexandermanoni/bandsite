@@ -1,3 +1,4 @@
+import { Hourglass, Plus } from "lucide-react";
 import { useState } from "react";
 
 type NewCreateSongProps = {
@@ -27,15 +28,18 @@ function NewCreateSong({ createSongForContext }: NewCreateSongProps) {
                         Creating...
                     </div>
                     <div className="buttonlabel mobileview">
-                        @
+                        <Hourglass size={ "1rem" } />
                     </div>
                 </button>
             }
             {
                 !creating &&
                 <button className="postbutton" onClick={handleCreateSong} style={{ marginLeft: "auto" }}>
-                    <div className="buttonlabel">
+                    <div className="buttonlabel desktopview">
                         Create Song
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        <Plus size={ "1rem" } />
                     </div>
                 </button>
             }

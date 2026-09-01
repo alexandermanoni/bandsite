@@ -1,3 +1,5 @@
+import { Trash2 } from "lucide-react";
+
 type DeleteSetlistProps = {
     deleteSetlist: () => Promise<void>;
 }
@@ -18,7 +20,7 @@ function DeleteSetlist({ deleteSetlist }: DeleteSetlistProps) {
         <>
             <button className="criticalbutton" onClick={handleDelete}>
                 <div className="buttonlabel">
-                    D
+                    <Trash2 size={ "1rem" }/>
                 </div>
                 {/* <div className="buttonlabel desktopview">
                     Delete Setlist
