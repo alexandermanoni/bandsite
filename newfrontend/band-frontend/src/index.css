@@ -315,6 +315,12 @@ li:nth-child(even) {
     gap: 1rem;
 }
 
+.mobilemaincontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 /* AUDIO PLAYER */
 
 .audioplayer {
@@ -368,7 +374,7 @@ input[type="range"] {
             #636363) border-box;
 }
 
-.audioplayer input[type="range"]::-webkit-slider-thumb::active {
+.audioplayer input[type="range"]::-webkit-slider-thumb:active {
     background:
         radial-gradient(ellipse 50% 30% at 50% 15%,
             rgba(255, 255, 255, 0.5) 0%,
@@ -383,33 +389,27 @@ input[type="range"] {
 }
 
 .audioplayer input[type="range"]::-moz-range-thumb {
-  width: 22px;
-  height: 10px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  margin-top: -2px;
-  
-  background:
-  radial-gradient(
-    ellipse 50% 30% at 50% 15%,
-    rgba(255, 255, 255, 1.0) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0.25) 75%
-  ),
+    width: 22px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    margin-top: -2px;
 
-  radial-gradient(
-    ellipse 100% 100% at 50% 100%,
-    #ffffff 0%,
-    #d7d7d7 50%,
-    #b4b4b4 100%
-  ) padding-box,
+    background:
+        radial-gradient(ellipse 50% 30% at 50% 15%,
+            rgba(255, 255, 255, 1.0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.25) 75%),
 
-  radial-gradient(
-    ellipse 90% 100% at 50% 100%,
-    #bababa 0%,
-    #9b9b9b 50%,
-    #636363 100%
-  ) border-box;
+        radial-gradient(ellipse 100% 100% at 50% 100%,
+            #ffffff 0%,
+            #d7d7d7 50%,
+            #b4b4b4 100%) padding-box,
+
+        radial-gradient(ellipse 90% 100% at 50% 100%,
+            #bababa 0%,
+            #9b9b9b 50%,
+            #636363 100%) border-box;
 }
 
 .songvolume {}
@@ -418,6 +418,53 @@ input[type="range"] {
 
 .mobileview {
     display: none;
+}
+
+/* MOBILE ONLY TABS */
+.tabcontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px;
+
+    border: 1px solid #f0f0f0;
+    border-radius: 999px;
+    background-color: white;
+}
+
+.tabcontainer > div.active {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 4px;
+
+    --body-start: #ffffff;
+    --body-middle: #d7d7d7;
+    --body-end: #b4b4b4;
+
+    --border-start: #bababa;
+    --border-middle: #9b9b9b;
+    --border-end: #636363;
+
+    background:
+        /* highlight */
+        radial-gradient(ellipse 80% 20% at 50% 15%,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 0.3) 40%,
+            rgba(255, 255, 255, 0.15) 75%),
+
+        /* body */
+        radial-gradient(ellipse 100% 100% at 50% 100%,
+            var(--body-start),
+            var(--body-middle),
+            var(--body-end)) padding-box,
+
+        /* border */
+        radial-gradient(ellipse 90% 100% at 50% 100%,
+            var(--border-start),
+            var(--border-middle),
+            var(--border-end)) border-box;
 }
 
 /* || MOBILE GENERAL STYLES */
@@ -450,16 +497,9 @@ input[type="range"] {
 
     /* BUTTONS */
 
-    .postbutton .buttonlabel {
+    .buttonlabel {
         padding: 4px;
         font-size: 1rem;
-        font-weight: bold;
-    }
-
-    .criticalbutton .buttonlabel {
-        padding: 4px;
-        font-size: 1rem;
-        font-weight: bold;
     }
 
     /* GENERAL FORMS */
@@ -492,6 +532,10 @@ input[type="range"] {
 
     .mobileview {
         display: flex;
+    }
+
+    button {
+        font-size: 1rem;
     }
 
     /* make band list take up max width */

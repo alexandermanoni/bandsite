@@ -67,8 +67,11 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong, se
                         </div>
 
                         {/* Add song to setlist button */}
-                        <button type="button" onClick={() => addSongToSetlist(song.id)}>
+                        <button className="desktopview" type="button" onClick={() => addSongToSetlist(song.id)}>
                             Add {"->"}
+                        </button>
+                        <button className="mobileview" type="button" onClick={() => addSongToSetlist(song.id)}>
+                            Add
                         </button>
 
                         {/* Mobile options */}

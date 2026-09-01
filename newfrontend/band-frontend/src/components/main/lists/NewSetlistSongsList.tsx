@@ -39,8 +39,11 @@ function NewSetlistSongsList({ songs, songpositions, moveSongUp, moveSongDown, r
                                     <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
                                         Down
                                     </button>
-                                    <button id="standardbutton" type="button" onClick={() => removeSong(song.id)}>
+                                    <button className="desktopview" type="button" onClick={() => removeSong(song.id)}>
                                         Remove
+                                    </button>
+                                    <button className="mobileview" type="button" onClick={() => removeSong(song.id)}>
+                                        -
                                     </button>
                                 </span>
                         </li>

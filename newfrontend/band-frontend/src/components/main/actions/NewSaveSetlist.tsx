@@ -4,9 +4,14 @@ type NewSaveSetlistProps = {
 
 function NewSaveSetlist({ savesetlist }: NewSaveSetlistProps) {
     return (
-        <button className="postbutton" type="button" onClick={savesetlist}>
-            Save Setlist
-        </button>
+        <>
+            <button className="postbutton desktopview" type="button" onClick={savesetlist}>
+                Save Setlist
+            </button>
+            <button className="postbutton mobileview" type="button" onClick={savesetlist}>
+                Save
+            </button>
+        </>
     );
 }
 

@@ -34,11 +34,8 @@ function NewCreateSong({ createSongForContext }: NewCreateSongProps) {
             {
                 !creating &&
                 <button className="postbutton" onClick={handleCreateSong} style={{ marginLeft: "auto" }}>
-                    <div className="buttonlabel desktopview">
+                    <div className="buttonlabel">
                         Create Song
-                    </div>
-                    <div className="buttonlabel mobileview">
-                        +
                     </div>
                 </button>
             }

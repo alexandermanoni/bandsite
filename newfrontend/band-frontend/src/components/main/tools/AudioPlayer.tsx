@@ -85,19 +85,37 @@ function AudioPlayer({ src }: AudioPlayerProps) {
     <div className="audioplayer">
       <audio ref={audioRef} src={src} />
 
-      {
-        src === ""
-          ? (
-            <button onClick={() => { } }>
-              No Song
-            </button>
-          )
-          : (
-            <button onClick={togglePlay}>
-              {playing ? "Pause" : "Play"}
-            </button>
-          )
-      }
+      <div className="desktopview">
+        {
+          src === ""
+            ? (
+              <button onClick={() => { }}>
+                No Song
+              </button>
+            )
+            : (
+              <button onClick={togglePlay}>
+                {playing ? "Pause" : "Play"}
+              </button>
+            )
+        }
+      </div>
+
+      <div className="mobileview">
+        {
+          src === ""
+            ? (
+              <button onClick={() => { }}>
+                O
+              </button>
+            )
+            : (
+              <button onClick={togglePlay}>
+                {playing ? "||" : ">"}
+              </button>
+            )
+        }
+      </div>
 
       <span>{formatTime(currentTime)}</span>
 

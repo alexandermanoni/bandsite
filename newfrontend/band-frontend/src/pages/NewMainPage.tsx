@@ -18,12 +18,13 @@ export function NewMainPage() {
     const context = useContext(MainContext);
 
     const [selSongSrc, setSelSongSrc] = useState("");
+    const [activeTab, setActiveTab] = useState("songs");
 
     return (
         <>
             <h2>Setlist Creation Utility</h2>
 
-            {/* Current band section */}
+            {/* Main page desktop view */}
             <div className="mainpagecontainer desktopview">
 
                 {/* left column */}
@@ -69,56 +70,60 @@ export function NewMainPage() {
                 </div>
             </div>
 
-            {/* <div className="bandcontainer desktopview">
-                    Current Band: 
-                    <NewBandList bands={context.contextState.bands} selectedBandID={context.contextState.selectedBandID} getBandsFromContext={context.getBands} selectBandForContext={context.selectBand} />
-                    <NewCreateBand createBandForContext={context.createBand} />
-                    <DeleteBand deleteBand={context.deleteCurrentBand} />                    
-                </div> */}
+            {/* Main page mobile view */}
+            <div className="mobilemaincontainer mobileview">
 
-            <div className="mobileview" style={{ display: "flex", flexDirection: "column" }}>
-                <div className="bandcontainer mobileview">
+                {/* band selector and create/delete */}
+                <div className="bandcontainer">
                     <DeleteBand deleteBand={context.deleteCurrentBand} />
                     <NewBandList bands={context.contextState.bands} selectedBandID={context.contextState.selectedBandID} getBandsFromContext={context.getBands} selectBandForContext={context.selectBand} />
                     <NewCreateBand createBandForContext={context.createBand} />
-
                 </div>
 
-                <div className="mobileview">
-                    <NewSongList songs={context.contextState.songs} addSongToSetlist={context.addSongToSetlist} uploadSongSource={context.uploadSongSource} deleteSong={context.deleteSong} selectSong={setSelSongSrc} />                </div>
+                {/* tab selector */}
+                <div className="tabcontainer">
+                    <div className={activeTab === "songs" ? "active" : ""} style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }} onClick={() => setActiveTab("songs")}>
+                        Songs
+                    </div>
+                    <div className={activeTab === "setlists" ? "active" : ""} style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }} onClick={() => setActiveTab("setlists")}>
+                        Setlists
+                    </div>
+                </div>
+
+                {/* on song tab */}
+                {
+                    activeTab === "songs" &&
+                    <div className="mobilemaincontainer" style={{ gap: "0rem", }}>
+                        <NewSongList songs={context.contextState.songs} addSongToSetlist={context.addSongToSetlist} uploadSongSource={context.uploadSongSource} deleteSong={context.deleteSong} selectSong={setSelSongSrc} />
+                        <NewCreateSong createSongForContext={context.createSong} />
+                    </div>
+                }
+
+                {/* on setlist tab */}
+                {
+                    activeTab === "setlists" &&
+                    <div>
+                        {/* setlist selector and create/delete */}
+                        <div className="bandcontainer">
+                            <DeleteSetlist deleteSetlist={context.deleteCurrentSetlist} />
+                            <NewSetlistList setlists={context.contextState.setlists} selectedSetlistID={context.contextState.selectedSetlistID} selectSetlistForContext={context.selectSetlist} />
+                            <NewCreateSetlist createSetlistForContext={context.createSetlist} />
+                        </div>
+
+                        {/* list of songs in setlist */}
+                        <NewSetlistSongsList songs={context.contextState.songs} songpositions={context.contextState.songpositions} moveSongUp={context.moveSongUp} moveSongDown={context.moveSongDown} removeSong={context.removeSongFromSetlist} />
+
+                        {/* setlist options */}
+                        <div className="buttongroup" style={{ justifyContent: "end" }}>
+                            <ExportToPdf exporttopdf={context.getSetlistPdf} />
+                            <ExportToZip exporttozip={context.getSetlistZip} />
+                            <NewSaveSetlist savesetlist={context.uploadSetlist} />
+                        </div>
+                    </div>
+                }
             </div>
 
             <AudioPlayer src={selSongSrc} />
-
-            {/* <div className="mobileview">
-                    <div className="bandcontainer mobileview">
-                        <DeleteBand deleteBand={context.deleteCurrentBand} />
-                        <NewBandList bands={context.contextState.bands} selectedBandID={context.contextState.selectedBandID} getBandsFromContext={context.getBands} selectBandForContext={context.selectBand} />
-                        <NewCreateBand createBandForContext={context.createBand} />
-                    </div>
-
-                    <NewSongList songs={context.contextState.songs} addSongToSetlist={context.addSongToSetlist} uploadSongSource={context.uploadSongSource} deleteSong={context.deleteSong} />
-                </div> */}
-
-            {/* <div id="maincontent">
-                <div>
-                    
-                    
-                    <NewCreateSong createSongForContext={context.createSong} />
-                </div>
-                <div>
-                    <NewCreateSetlist createSetlistForContext={context.createSetlist} />
-                    <NewSetlistList setlists={context.contextState.setlists} selectedSetlistID={context.contextState.selectedSetlistID} selectSetlistForContext={context.selectSetlist} />
-                    {" "}
-                    <DeleteSetlist deleteSetlist={context.deleteCurrentSetlist} />
-                    <NewSetlistSongsList songs={context.contextState.songs} songpositions={context.contextState.songpositions} moveSongUp={context.moveSongUp} moveSongDown={context.moveSongDown} removeSong={context.removeSongFromSetlist} />
-                    <div id="setlistoptions">
-                        <NewSaveSetlist savesetlist={context.uploadSetlist} />
-                        <ExportToPdf exporttopdf={context.getSetlistPdf} />
-                        <ExportToZip exporttozip={context.getSetlistZip} />
-                    </div>
-                </div>
-            </div> */}
         </>
     );
 }
