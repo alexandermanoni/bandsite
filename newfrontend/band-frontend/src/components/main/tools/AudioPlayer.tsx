@@ -82,23 +82,19 @@ function AudioPlayer({ src }: AudioPlayerProps) {
   };
 
   return (
-    <div className="audioPlayer">
+    <div className="audioplayer">
       <audio ref={audioRef} src={src} />
 
       {
         src === ""
           ? (
             <button onClick={() => { } }>
-              <span>
-                No Song
-              </span>
+              No Song
             </button>
           )
           : (
             <button onClick={togglePlay}>
-              <span>
-                {playing ? "Pause" : "Play"}
-              </span>
+              {playing ? "Pause" : "Play"}
             </button>
           )
       }
@@ -106,7 +102,7 @@ function AudioPlayer({ src }: AudioPlayerProps) {
       <span>{formatTime(currentTime)}</span>
 
       <input
-        id="songtimeline"
+        className="songtimeline"
         type="range"
         min="0"
         max={duration}
@@ -116,8 +112,9 @@ function AudioPlayer({ src }: AudioPlayerProps) {
 
       <span>{formatTime(duration)}</span>
 
+      {/* don't show volume on mobile */}
       <input
-      id="songvolume"
+        className="songvolume desktopview"
         type="range"
         min="0"
         max="1"
@@ -125,6 +122,8 @@ function AudioPlayer({ src }: AudioPlayerProps) {
         value={volume}
         onChange={changeVolume}
       />
+
+      <span className="desktopview">Volume</span>
     </div>
   );
 }

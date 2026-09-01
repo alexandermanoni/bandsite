@@ -6,7 +6,7 @@ type DeleteSongProps = {
 function DeleteSong({ songid, deleteSong }: DeleteSongProps) {
     const handleDelete = async (songid: string) => {
         const confirmed = window.confirm(
-            "Are you sure you want to delete this song? This cannot be undone."
+            "Are you sure you want to delete this song?\nThis cannot be undone."
         );
 
         if (!confirmed) {
@@ -18,8 +18,12 @@ function DeleteSong({ songid, deleteSong }: DeleteSongProps) {
     return (
         <>
             {/* <button type="button" onClick={() => deleteSong(songid)}>Delete</button> */}
-            <button id="criticalbutton" type="button" onClick={() => handleDelete(songid)}>
-                <span>Delete</span>
+            <button className="criticalbutton desktopview" type="button" onClick={() => handleDelete(songid)}>
+                D
+            </button>
+
+            <button className="criticalbutton mobileview" type="button" onClick={() => handleDelete(songid)}>
+                Delete
             </button>
         </>
     );

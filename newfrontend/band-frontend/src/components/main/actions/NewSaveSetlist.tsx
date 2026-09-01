@@ -4,8 +4,8 @@ type NewSaveSetlistProps = {
 
 function NewSaveSetlist({ savesetlist }: NewSaveSetlistProps) {
     return (
-        <button type="button" onClick={savesetlist}>
-            <span>Save Setlist</span>
+        <button className="postbutton" type="button" onClick={savesetlist}>
+            Save Setlist
         </button>
     );
 }

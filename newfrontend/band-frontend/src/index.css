@@ -1,5 +1,9 @@
 /* || GENERAL STYLES */
 
+* {
+    box-sizing: border-box;
+}
+
 #root {
     width: 1100px;
     max-width: 100%;
@@ -9,14 +13,12 @@
 
     margin: 0 auto;
     padding: 16px;
-    
-    background: repeating-linear-gradient(
-        to bottom,
-        white 0px,
-        white 2px,
-        #f0f0f0 2px,
-        #f0f0f0 4px
-    );
+
+    background: repeating-linear-gradient(to bottom,
+            white 0px,
+            white 2px,
+            #f0f0f0 2px,
+            #f0f0f0 4px);
 
     border-radius: 16px;
 }
@@ -41,40 +43,23 @@ button {
     --border-end: #636363;
 
     background:
-        radial-gradient(
-        ellipse 200% 100% at 50% 100%,
-        var(--body-start),
-        var(--body-middle),
-        var(--body-end)
-        ) padding-box,
+        /* highlight */
+        radial-gradient(ellipse 80% 20% at 50% 15%,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 0.3) 40%,
+            rgba(255, 255, 255, 0.15) 75%),
 
-        radial-gradient(
-        ellipse 90% 100% at 50% 100%,
-        var(--border-start),
-        var(--border-middle),
-        var(--border-end)
-        ) border-box;
-}
+        /* body */
+        radial-gradient(ellipse 100% 100% at 50% 100%,
+            var(--body-start),
+            var(--body-middle),
+            var(--body-end)) padding-box,
 
-button .buttonlabel {
-    color: black;
-    padding: 0 12px;
-    border-radius: 4px;
-
-    font-weight: 500;
-
-    /* highlight sections */
-    --highlight-s1: rgba(213, 213, 213, 0.1);
-    --highlight-s2: rgba(178, 178, 178, 0.1);
-    --highlight-s3: rgba(112, 112, 112, 0.1);
-
-    background: radial-gradient(
-        ellipse 200% 100% at 50% 100%,
-        var(--highlight-s1),
-        var(--highlight-s2) 50%,
-        var(--highlight-s3) 90%,
-        rgba(255, 255, 255, 0.85) 100%
-    );
+        /* border */
+        radial-gradient(ellipse 90% 100% at 50% 100%,
+            var(--border-start),
+            var(--border-middle),
+            var(--border-end)) border-box;
 }
 
 button:active {
@@ -89,27 +74,97 @@ button:active {
 
 /* Update backend */
 .postbutton {
-  --body-start: #94efff;
-  --body-middle: #5f92ff;
-  --body-end: #1d64ff;
+    --body-start: #94efff;
+    --body-middle: #5f92ff;
+    --body-end: #1d64ff;
 
-  --border-start: #5fc5dd;
-  --border-middle: #285dcc;
-  --border-end: #00329c;
+    --border-start: #5fc5dd;
+    --border-middle: #285dcc;
+    --border-end: #00329c;
 }
 
 /* Button highlight */
 .postbutton .buttonlabel {
-  /* highlight sections */
-  --highlight-s1: rgba(240, 253, 255, 0.1);
-  --highlight-s2: rgba(220, 240, 255, 0.1);
-  --highlight-s3: rgba(193, 217, 255, 0.1);
+    /* highlight sections */
+    --highlight-s1: rgba(240, 253, 255, 0.1);
+    --highlight-s2: rgba(220, 240, 255, 0.1);
+    --highlight-s3: rgba(193, 217, 255, 0.1);
 }
 
 .postbutton:active {
     --body-start: #72eaff;
     --body-middle: #4680ff;
     --body-end: #105cff;
+}
+
+.criticalbutton {
+    --body-start: #ff94c1;
+    --body-middle: #ff5f7a;
+    --body-end: #ff1d1d;
+
+    --border-start: #dd5fbe;
+    --border-middle: #cc287a;
+    --border-end: #9c0000;
+}
+
+.criticalbutton .buttonlabel {
+    --highlight-s1: rgba(255, 203, 225, 0.1);
+    --highlight-s2: rgba(255, 182, 194, 0.1);
+    --highlight-s3: rgba(255, 171, 171, 0.1);
+}
+
+.criticalbutton:active {
+    --body-start: #f272a7;
+    --body-middle: #fe3b5c;
+    --body-end: #ff0303;
+}
+
+/* GENERAL DROPDOWNS */
+.dropdown {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+    font-weight: 500;
+    padding: 1px 12px;
+
+    /* name overflows to ellipses */
+    white-space: nowrap;
+    overflow: hidden;
+    /* overflow: visible; */
+    text-overflow: ellipsis;
+
+    background:
+        radial-gradient(ellipse 80% 20% at 50% 15%,
+            rgba(255, 255, 255, 1.0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.25) 75%),
+
+        radial-gradient(ellipse 100% 100% at 50% 100%,
+            #ffffff 0%,
+            #d7d7d7 50%,
+            #b4b4b4 100%) padding-box,
+
+        radial-gradient(ellipse 90% 100% at 50% 100%,
+            #bababa 0%,
+            #9b9b9b 50%,
+            #636363 100%) border-box;
+}
+
+.dropdown:focus {
+    border: 1px solid transparent;
+    border-radius: 999px;
+
+    background:
+        radial-gradient(ellipse 200% 100% at 50% 100%,
+            #c4c4c4 0%,
+            #a1a0a0 50%,
+            #5d5d5d 100%) padding-box,
+
+        radial-gradient(ellipse 90% 100% at 50% 100%,
+            #a1a1a1 0%,
+            #707070 50%,
+            #202020 100%) border-box;
 }
 
 /* GENERAL FORMS */
@@ -143,11 +198,226 @@ input[type="password"] {
     font-weight: bold;
 }
 
+/* GENERAL LISTS */
+
+ul {
+    background: white;
+    border: 1px solid #d5d5d5;
+    padding: 0px 0px;
+    list-style: none;
+}
+
+ul>li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 26px;
+
+    /* name overflows to ellipses */
+    white-space: nowrap;
+    /* overflow: hidden; */
+    overflow: visible;
+    text-overflow: ellipsis;
+}
+
+ol {
+    background: white;
+    border: 1px solid #d5d5d5;
+    padding: 0;
+
+    /* don't show default numbers */
+    list-style: none;
+    /* reset counter since not using default */
+    counter-reset: song;
+}
+
+ol>li {
+    display: flex;
+    align-items: center;
+    min-height: 26px;
+
+    /* use song for counter */
+    counter-increment: song;
+}
+
+/* song order number */
+ol>li::before {
+    content: counter(song) ".";
+}
+
+li:nth-child(odd) {
+    background: #f0f0f0;
+    padding: 0px 4px;
+}
+
+li:nth-child(even) {
+    background: #fff;
+    padding: 0px 4px;
+}
+
 /* LOGIN FORM */
 
 .loginform {
     /* make form half width of parent on desktop */
     max-width: 50%;
+}
+
+/* SPECIFICS */
+
+.bandcontainer {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+}
+
+.bandcontainer> :nth-child(1) {
+    flex: 1;
+}
+
+.uploadsong {
+    display: none;
+}
+
+.songlistentry {
+    display: flex;
+    gap: 4px;
+}
+
+.optionscontainer {
+    position: relative;
+}
+
+.optionsmenu {
+    /* align topright corners */
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+
+    background: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.buttongroup {
+    display: flex;
+    gap: 4px;
+}
+
+.mainpagecontainer {
+    display: flex;
+    gap: 1rem;
+}
+
+/* AUDIO PLAYER */
+
+.audioplayer {
+    display: flex;
+    gap: 4px;
+
+    /* this should be changed so that the player is always at the bottom of the screen */
+    margin-top: 2rem;
+}
+
+input[type="range"] {
+    appearance: none;
+    background: transparent;
+}
+
+.songtimeline {
+    /* take up most of the space */
+    flex: 1;
+}
+
+.audioplayer input[type="range"]::-webkit-slider-runnable-track {
+    appearance: none;
+    height: 6px;
+    background: linear-gradient(#b4b4b4, #d7d7d7);
+    border-radius: 999px;
+}
+
+.audioplayer input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+
+    width: 22px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    margin-top: -2px;
+
+    background:
+        radial-gradient(ellipse 50% 30% at 50% 15%,
+            rgba(255, 255, 255, 1.0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.25) 75%),
+
+        radial-gradient(ellipse 100% 100% at 50% 100%,
+            #ffffff,
+            #d7d7d7,
+            #b4b4b4) padding-box,
+
+        radial-gradient(ellipse 90% 100% at 50% 100%,
+            #bababa,
+            #9b9b9b,
+            #636363) border-box;
+}
+
+.audioplayer input[type="range"]::-webkit-slider-thumb::active {
+    background:
+        radial-gradient(ellipse 50% 30% at 50% 15%,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.5) 75%);
+}
+
+.audioplayer input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: linear-gradient(#b4b4b4, #d7d7d7);
+    border-radius: 999px;
+}
+
+.audioplayer input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  margin-top: -2px;
+  
+  background:
+  radial-gradient(
+    ellipse 50% 30% at 50% 15%,
+    rgba(255, 255, 255, 1.0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.25) 75%
+  ),
+
+  radial-gradient(
+    ellipse 100% 100% at 50% 100%,
+    #ffffff 0%,
+    #d7d7d7 50%,
+    #b4b4b4 100%
+  ) padding-box,
+
+  radial-gradient(
+    ellipse 90% 100% at 50% 100%,
+    #bababa 0%,
+    #9b9b9b 50%,
+    #636363 100%
+  ) border-box;
+}
+
+.songvolume {}
+
+/* DESKTOP VS MOBILE */
+
+.mobileview {
+    display: none;
 }
 
 /* || MOBILE GENERAL STYLES */
@@ -167,13 +437,11 @@ input[type="password"] {
 
     body {
         /* mobile sets general background to pinstripe */
-        background: repeating-linear-gradient(
-            to bottom,
-            white 0px,
-            white 2px,
-            #f0f0f0 2px,
-            #f0f0f0 4px
-        );
+        background: repeating-linear-gradient(to bottom,
+                white 0px,
+                white 2px,
+                #f0f0f0 2px,
+                #f0f0f0 4px);
     }
 
     .footer {
@@ -181,7 +449,14 @@ input[type="password"] {
     }
 
     /* BUTTONS */
+
     .postbutton .buttonlabel {
+        padding: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .criticalbutton .buttonlabel {
         padding: 4px;
         font-size: 1rem;
         font-weight: bold;
@@ -198,10 +473,33 @@ input[type="password"] {
         align-self: auto;
     }
 
+    /* DROPDOWNS */
+    .dropdown {
+        font-size: 1rem;
+    }
+
     /* LOGIN FORM */
 
     .loginform {
         /* take up whole mobile screen */
         max-width: 100%;
+    }
+
+    /* DESKTOP VS MOBILE */
+    .desktopview {
+        display: none;
+    }
+
+    .mobileview {
+        display: flex;
+    }
+
+    /* make band list take up max width */
+    .bandcontainer> :nth-child(1) {
+        flex: none;
+    }
+
+    .bandcontainer> :nth-child(2) {
+        flex: 1;
     }
 }

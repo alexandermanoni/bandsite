@@ -25,26 +25,24 @@ function NewSetlistSongsList({ songs, songpositions, moveSongUp, moveSongDown, r
                     // sort based on position in setlist
                     .map((song) => (
                         <li
+                            className="songlistentry"
                             key={song.id}
                         >
-                            <div id="listrow">
-                                <span id="songname">
-                                    {song.name}
-                                </span>
-                                <span id="buttongroup">
+                            <span style={{ flex: 1 }}>
+                                {song.name}
+                            </span>
+                            <span className="buttongroup">
                                     <button id="standardbutton" type="button" onClick={() => moveSongUp(song.id)}>
-                                        <span>Up</span>
+                                        Up
                                     </button>
-                                    {" / "}
+                                    {"/"}
                                     <button id="standardbutton" type="button" onClick={() => moveSongDown(song.id)}>
-                                        <span>Down</span>
+                                        Down
                                     </button>
-                                    {" "}
                                     <button id="standardbutton" type="button" onClick={() => removeSong(song.id)}>
-                                        <span>Remove</span>
+                                        Remove
                                     </button>
                                 </span>
-                            </div>
                         </li>
                     ))}
             </ol>

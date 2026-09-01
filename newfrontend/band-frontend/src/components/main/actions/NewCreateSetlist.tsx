@@ -1,38 +1,48 @@
+import { useState } from "react";
+
 type NewCreateSetlistProps = {
     createSetlistForContext: (name: string) => Promise<void>;
 }
 
 function NewCreateSetlist({ createSetlistForContext }: NewCreateSetlistProps) {
-    async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
-        event.preventDefault();
+    const [creating, setCreating] = useState(false);
 
-        const form = event.target;
-        const formData = new FormData(form);
+    async function handleCreateSetlist() {
+        const setlistName = prompt("Enter a name for the new setlist:");
 
-        // if form busted somehow
-        if (!formData.get("setlistNameInput")) return;
+        // user cancelled or input an empty name
+        if (!setlistName || setlistName?.trim() == "") return;
 
-        const name = formData.get("setlistNameInput")!.toString();
-
-        // empty name
-        if (name == "") return;
-
-        createSetlistForContext(name);
-
-        // reset
-        event.currentTarget.reset();
+        setCreating(true);
+        await createSetlistForContext(setlistName!);
+        setCreating(false);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                New Setlist: <input name="setlistNameInput" type="text" />
-            </label>
-            {" "}
-            <button type="submit">
-                <span>Create Setlist</span>
-            </button>
-        </form>
+        <>
+            {
+                creating &&
+                <button className="postbutton" onClick={() => {}}>
+                    <div className="buttonlabel desktopview">
+                        Creating...
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        @
+                    </div>
+                </button>
+            }
+            {
+                !creating &&
+                <button className="postbutton" onClick={handleCreateSetlist}>
+                    <div className="buttonlabel desktopview">
+                        Create Setlist
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        +
+                    </div>
+                </button>
+            }
+        </>
     );
 }
 

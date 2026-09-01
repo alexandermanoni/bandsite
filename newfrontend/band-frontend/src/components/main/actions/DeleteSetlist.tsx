@@ -5,7 +5,7 @@ type DeleteSetlistProps = {
 function DeleteSetlist({ deleteSetlist }: DeleteSetlistProps) {
     const handleDelete = async () => {
         const confirmed = window.confirm(
-            "Are you sure you want to delete this setlist? This cannot be undone."
+            "Are you sure you want to delete the current setlist?\nThis cannot be undone."
         );
 
         if (!confirmed) {
@@ -16,8 +16,16 @@ function DeleteSetlist({ deleteSetlist }: DeleteSetlistProps) {
     }
     return (
         <>
-            <button id="criticalbutton" type="button" onClick={handleDelete}>
-                <span>Delete Current Setlist</span>
+            <button className="criticalbutton" onClick={handleDelete}>
+                <div className="buttonlabel">
+                    D
+                </div>
+                {/* <div className="buttonlabel desktopview">
+                    Delete Setlist
+                </div>
+                <div className="buttonlabel mobileview">
+                    D
+                </div> */}
             </button>
         </>
     );

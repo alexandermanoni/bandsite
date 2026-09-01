@@ -1,45 +1,63 @@
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { Song } from "../../navigation/NewContextManagement";
 import DeleteSong from "../actions/DeleteSong";
 import NewUploadSong from "../actions/NewUploadSong";
-import AudioPlayer from "../tools/AudioPlayer";
 
 type NewSongListProps = {
     songs: Song[];
     addSongToSetlist: (id: string) => void;
     uploadSongSource: (song: Song, form: FormData) => Promise<void>; // < this is almost definitely bad
     deleteSong: (id: string) => Promise<void>; // < this too
+    selectSong: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong }: NewSongListProps) {
-    const [playingSong, setPlayingSong] = useState("");
+function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong, selectSong }: NewSongListProps) {
+    const [displayOptions, setDisplayOptions] = useState("");
+    const optionsRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (optionsRef.current && !optionsRef.current.contains(event.target as Node)) {
+                setDisplayOptions("");
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+    }, []);
 
     return (
         <>
             <ul>
                 {(songs ?? []).map((song) => (
                     <li
+                        className="songlistentry"
                         key={song.id}
                     >
-                        <DeleteSong songid={song.id} deleteSong={deleteSong} />
-                        <span id="songname">
+                        {/* only show delete button on desktop */}
+                        <div className="desktopview">
+                            <DeleteSong songid={song.id} deleteSong={deleteSong} />
+                        </div>                 
+
+                        <span style={{ flex: 1 }}>
                             {song.name}
                         </span>
-                        <div id="buttongroup">
-                            <button id="standardbutton" type="button" onClick={() => addSongToSetlist(song.id)}>
-                                <span>Add</span>
-                            </button>
-                            {" "}
+                        
+                        {/* only show upload song on desktop */}
+                        <div className="desktopview">                        
                             {
                                 song.sourcefile
                                 ? (
                                     <button 
-                                        id="standardbutton"
                                         onClick={() => {
-                                            setPlayingSong(song.sourcefile)
+                                            selectSong(song.sourcefile);
+                                            // setPlayingSong(song.sourcefile)
                                         }}
                                     >
-                                        <span>Play Audio File</span>
+                                        Play Song
                                     </button>
                                 )
                                 : (
@@ -47,11 +65,46 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong }: 
                                 )
                             }
                         </div>
+
+                        {/* Add song to setlist button */}
+                        <button type="button" onClick={() => addSongToSetlist(song.id)}>
+                            Add {"->"}
+                        </button>
+
+                        {/* Mobile options */}
+                        <div className="mobileview optionscontainer" ref={optionsRef}>
+                            <div className="mobileview">
+                                <button onClick={() => setDisplayOptions(song.id)}>
+                                    |
+                                </button>
+                            </div>
+
+                            {
+                                displayOptions === song.id &&
+                                <div className="optionsmenu">
+                                    {
+                                        song.sourcefile
+                                        ? (
+                                            <button className="mobileview"
+                                                onClick={() => {
+                                                    selectSong(song.sourcefile);
+                                                    // setPlayingSong(song.sourcefile)
+                                                }}
+                                            >
+                                                Play Song
+                                            </button>
+                                        )
+                                        : (
+                                            <NewUploadSong song={song} uploadSongSource={uploadSongSource}/>
+                                        )
+                                    }
+                                    <DeleteSong songid={song.id} deleteSong={deleteSong} />
+                                </div>
+                            }
+                        </div>
                     </li>
                 ))}
             </ul>
-
-            <AudioPlayer src={playingSong} />
         </>
     );
 }

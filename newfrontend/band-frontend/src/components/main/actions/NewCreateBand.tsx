@@ -22,17 +22,23 @@ function NewCreateBand({ createBandForContext }: NewCreateBandProps) {
         <>
             {
                 creating &&
-                <button onClick={() => {}}>
-                    <div>
+                <button className="postbutton" onClick={() => {}}>
+                    <div className="buttonlabel desktopview">
                         Creating...
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        @
                     </div>
                 </button>
             }
             {
                 !creating &&
                 <button className="postbutton" onClick={handleCreateBand}>
-                    <div className="buttonlabel">
+                    <div className="buttonlabel desktopview">
                         Create Band
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        +
                     </div>
                 </button>
             }

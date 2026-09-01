@@ -1,38 +1,57 @@
+import { useState } from "react";
+
 type NewCreateSongProps = {
     createSongForContext: (name: string) => Promise<void>;
 }
 
 function NewCreateSong({ createSongForContext }: NewCreateSongProps) {
-    function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
-        event.preventDefault();
+    const [creating, setCreating] = useState(false);
 
-        const form = event.target;
-        const formData = new FormData(form);
+    async function handleCreateSong() {
+        const songName = prompt("Enter a name for the new song:");
 
-        // if form busted somehow
-        if (!formData.get("songNameInput")) return;
+        // user cancelled or input an empty name
+        if (!songName || songName?.trim() == "") return;
 
-        const name = formData.get("songNameInput")!.toString();
-
-        // empty name
-        if (name == "") return;
-
-        createSongForContext(name);
-
-        // reset
-        event.currentTarget.reset();
+        setCreating(true);
+        await createSongForContext(songName!);
+        setCreating(false);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                New Song: <input name="songNameInput" type="text" />
-            </label>
-            {" "}
-            <button type="submit">
-                <span>Create Song</span>
-            </button>
-        </form>
+        <>
+            {
+                creating &&
+                <button className="postbutton" onClick={() => {}}>
+                    <div className="buttonlabel desktopview">
+                        Creating...
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        @
+                    </div>
+                </button>
+            }
+            {
+                !creating &&
+                <button className="postbutton" onClick={handleCreateSong} style={{ marginLeft: "auto" }}>
+                    <div className="buttonlabel desktopview">
+                        Create Song
+                    </div>
+                    <div className="buttonlabel mobileview">
+                        +
+                    </div>
+                </button>
+            }
+        </>
+        // <form onSubmit={handleSubmit}>
+        //     <label>
+        //         New Song: <input name="songNameInput" type="text" />
+        //     </label>
+        //     {" "}
+        //     <button type="submit">
+        //         <span>Create Song</span>
+        //     </button>
+        // </form>
     );
 }
 

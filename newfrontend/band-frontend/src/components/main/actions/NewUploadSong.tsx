@@ -35,15 +35,13 @@ function NewUploadSong({ song, uploadSongSource }: NewUploadSongProps) {
 
     return (
         <>
-            <input id="upload-song" ref={fileInputRef} type="file" accept="audio/*" onChange={handleSubmit}/>
-            <button onClick={handleClick}>
-                {!loading && <span>Upload Audio File</span>}
-                {loading && <span>Uploading Audio File</span>}
-                {/* <span>Upload Audio File</span> */}
-            </button>
-            {/* <button onClick={() => document.getElementById("upload-song")?.click()}>
-                <span>Upload Audio File</span>
-            </button> */}
+            <input className="uploadsong" ref={fileInputRef} type="file" accept="audio/*" onChange={handleSubmit}/>
+            { 
+                !loading && <button className="postbutton" onClick={handleClick}>Upload Audio File</button>
+            }
+            {
+                loading && <button onClick={() => {}}>Loading...</button>
+            }
         </>
     );
 }
