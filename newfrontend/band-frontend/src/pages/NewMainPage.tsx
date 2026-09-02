@@ -13,6 +13,7 @@ import DeleteBand from "../components/main/actions/DeleteBand";
 import ExportToZip from "../components/main/actions/ExportToZip";
 import ExportToPdf from "../components/main/actions/ExportToPdf";
 import AudioPlayer from "../components/main/tools/AudioPlayer";
+import SpotifyProfileViewer from "../components/main/tools/SpotifyProfileViewer";
 
 export function NewMainPage() {
     const context = useContext(MainContext);
@@ -123,6 +124,7 @@ export function NewMainPage() {
                 }
             </div>
 
+            <SpotifyProfileViewer />
             <AudioPlayer src={selSongSrc} />
         </>
     );
