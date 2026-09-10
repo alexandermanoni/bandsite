@@ -14,6 +14,7 @@ import ExportToZip from "../components/main/actions/ExportToZip";
 import ExportToPdf from "../components/main/actions/ExportToPdf";
 import AudioPlayer from "../components/main/tools/AudioPlayer";
 import SpotifyProfileViewer from "../components/main/tools/SpotifyProfileViewer";
+import UploadSongSpotify from "../components/main/actions/UploadSongSpotify";
 
 export function NewMainPage() {
     const context = useContext(MainContext);
@@ -40,7 +41,7 @@ export function NewMainPage() {
                     </div>
 
                     {/* list of songs for band */}
-                    <NewSongList songs={context.contextState.songs} addSongToSetlist={context.addSongToSetlist} uploadSongSource={context.uploadSongSource} deleteSong={context.deleteSong} selectSong={setSelSongSrc} />
+                    <NewSongList songs={context.contextState.songs} addSongToSetlist={context.addSongToSetlist} uploadSongSource={context.uploadSongSource} uploadSongSpotify={context.uploadSongSpotify} deleteSong={context.deleteSong} selectSong={setSelSongSrc} />
 
                     {/* create song button */}
                     <div style={{ display: "flex" }}>
@@ -125,6 +126,7 @@ export function NewMainPage() {
             </div>
 
             <SpotifyProfileViewer />
+            <UploadSongSpotify />
             <AudioPlayer src={selSongSrc} />
         </>
     );

@@ -2,17 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import type { Song } from "../../navigation/NewContextManagement";
 import DeleteSong from "../actions/DeleteSong";
 import NewUploadSong from "../actions/NewUploadSong";
-import { ArrowRightFromLine, EllipsisVertical } from "lucide-react";
+import { ArrowRight, ArrowRightFromLine, EllipsisVertical } from "lucide-react";
+import UploadSongSpotify from "../actions/UploadSongSpotify";
+import NewUploadSongSpotify from "../actions/NewUploadSongSpotify";
 
 type NewSongListProps = {
     songs: Song[];
     addSongToSetlist: (id: string) => void;
     uploadSongSource: (song: Song, form: FormData) => Promise<void>; // < this is almost definitely bad
+    uploadSongSpotify: (song: Song, uri: string) => Promise<void>; // this too
     deleteSong: (id: string) => Promise<void>; // < this too
     selectSong: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong, selectSong }: NewSongListProps) {
+function NewSongList({ songs, addSongToSetlist, uploadSongSource, uploadSongSpotify, deleteSong, selectSong }: NewSongListProps) {
     const [displayOptions, setDisplayOptions] = useState("");
     const optionsRef = useRef<HTMLDivElement>(null);
 
@@ -48,11 +51,10 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong, se
                         </span>
                         
                         {/* only show upload song on desktop */}
-                        <div className="desktopview">                        
-                            {
-                                song.sourcefile
-                                ? (
-                                    <button 
+                        <div className="desktopview">
+                            <NewUploadSongSpotify song={song} uploadSongSpotify={uploadSongSpotify} />
+                            <NewUploadSong song={song} uploadSongSource={uploadSongSource}/>
+                            <button 
                                         onClick={() => {
                                             selectSong(song.sourcefile);
                                             // setPlayingSong(song.sourcefile)
@@ -60,16 +62,11 @@ function NewSongList({ songs, addSongToSetlist, uploadSongSource, deleteSong, se
                                     >
                                         Play Song
                                     </button>
-                                )
-                                : (
-                                    <NewUploadSong song={song} uploadSongSource={uploadSongSource}/>
-                                )
-                            }
                         </div>
 
                         {/* Add song to setlist button */}
                         <button className="desktopview" type="button" onClick={() => addSongToSetlist(song.id)}>
-                            Add <ArrowRightFromLine size={ "1rem" } />
+                            Add <ArrowRight size={ "1rem" } />
                         </button>
                         <button className="mobileview" type="button" onClick={() => addSongToSetlist(song.id)}>
                             <div className="buttonlabel">

@@ -3,13 +3,16 @@ import './App.css'
 import { AuthProvider } from './auth/AuthContext'
 import { AppRoutes } from './routes/AppRoutes'
 import { ContextProvider } from './components/navigation/NewContextManagement'
+import { SpotifyAuthContextProvider } from './auth/SpotifyAuthContext'
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <ContextProvider>
-          <AppRoutes />
+          <SpotifyAuthContextProvider>
+            <AppRoutes />
+          </SpotifyAuthContextProvider>
         </ContextProvider>        
       </BrowserRouter>
     </AuthProvider>

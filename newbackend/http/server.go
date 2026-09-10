@@ -77,6 +77,7 @@ func (s *Server) setHandlers() {
 		api.POST("/createsong", s.createSong)
 		api.POST("/createsetlist", s.createSetlist)
 		api.POST("/uploadsong", s.uploadSongSource)
+		api.POST("/uploadsongspotify", s.uploadSongSpotify)
 		api.POST("/uploadsongpositions", s.uploadSongPositions)
 
 		api.POST("/deletesetlist/:setlistid", s.deleteSetlist)
@@ -637,6 +638,38 @@ func (s *Server) uploadSongSource(c *gin.Context) {
 	if err != nil {
 		c.IndentedJSON(http.StatusConflict, nil)
 		fmt.Printf("Failed to upload song source: %v\n", err)
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, nil)
+}
+
+func (s *Server) uploadSongSpotify(c *gin.Context) {
+	userID, exists := c.Get("userID")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, nil)
+		return
+	}
+
+	// get request
+	var req UploadSpotifyRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, nil)
+		fmt.Printf("Upload song spotify request error: %v\n", err)
+		return
+	}
+
+	songid, err := strconv.Atoi(req.SongID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, nil)
+		fmt.Printf("Failed to get song id to upload song spotify: %v\n", err)
+		return
+	}
+
+	err = s.SongService.UploadSongSpotify(c, userID.(int), songid, req.SpotifyURI)
+	if err != nil {
+		c.IndentedJSON(http.StatusConflict, nil)
+		fmt.Printf("Failed to upload song spotify: %v\n", err)
 		return
 	}
 

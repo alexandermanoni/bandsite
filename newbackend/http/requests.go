@@ -31,3 +31,8 @@ type UploadSetlistRequest struct {
 	SetlistID     string            `json:"setlistid"`
 	SongPositions []newbackend.Song `json:"songpositions"`
 }
+
+type UploadSpotifyRequest struct {
+	SongID     string `json:"songid"`
+	SpotifyURI string `json:"spotifyuri"`
+}

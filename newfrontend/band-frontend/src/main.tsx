@@ -5,7 +5,8 @@ import App from './App.tsx'
 
 // [note]: StrictMode causes fetch reqs to run twice
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <App />
+  // <StrictMode>
+  //   <App />
+  // </StrictMode>,
 )

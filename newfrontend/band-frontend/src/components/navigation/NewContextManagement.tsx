@@ -11,6 +11,7 @@ export type Song = {
     id: string;
     name: string;
     sourcefile: string;
+    spotifyURI: string;
 }
 
 export type SongPosition = {
@@ -43,6 +44,7 @@ export type ContextState = {
     createSong: (name: string) => Promise<void>;
     createSetlist: (name: string) => Promise<void>;
     uploadSongSource: (song: Song, form: FormData) => Promise<void>;
+    uploadSongSpotify: (song: Song, uri: string) => Promise<void>;
     uploadSetlist: () => Promise<void>;
 
     deleteCurrentBand: () => Promise<void>;
@@ -377,12 +379,27 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
 
     async function uploadSongSource(song: Song, form: FormData) {
         const result = await apiFetch("uploadsong", { method: "POST", body: form });
-        console.log("Temp fix for gcp: ", song);
 
         if (!result.ok) return;
 
         // reload songs
         getSongs();
+    }
+
+    async function uploadSongSpotify(song: Song, uri: string) {
+        const requestBody = { songid: song?.id.toString(), spotifyuri: uri };
+        const result = await apiFetch(
+            "uploadsongspotify", 
+            { 
+                method: "POST", 
+                body: JSON.stringify(requestBody)
+            }
+        );
+
+        if (!result.ok) return;
+
+        // set uri, don't reload all songs
+        song.spotifyURI = uri;
     }
 
     async function uploadSetlist() {
@@ -622,6 +639,7 @@ export function ContextProvider({ children }: { children: React.ReactNode; }) {
                 createSong,
                 createSetlist,
                 uploadSongSource,
+                uploadSongSpotify,
                 uploadSetlist,
 
                 deleteCurrentBand,

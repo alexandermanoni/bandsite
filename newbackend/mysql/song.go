@@ -26,7 +26,7 @@ func (s *SongService) FindSongsByBand(ctx context.Context, userid int, bandid in
 	var foundSongs []newbackend.Song
 
 	rows, err := s.db.db.QueryContext(ctx, `
-		SELECT song_id, name FROM re_songs rs 
+		SELECT song_id, name, COALESCE(spotifyuri, '') AS spotifyuri FROM re_songs rs 
 		JOIN bandmembers bm 
 		ON rs.band_id = bm.band_id 
 		WHERE bm.user_id = ?
@@ -40,7 +40,7 @@ func (s *SongService) FindSongsByBand(ctx context.Context, userid int, bandid in
 	for rows.Next() {
 		var song newbackend.Song
 
-		if err := rows.Scan(&song.ID, &song.Name); err != nil {
+		if err := rows.Scan(&song.ID, &song.Name, &song.SpotifyURI); err != nil {
 			return nil, err
 		}
 
@@ -111,6 +111,33 @@ func (s *SongService) UploadSongSource(ctx *gin.Context, userid int, songid int,
 	defer tx.Rollback()
 
 	err = uploadSong(ctx, tx, userid, songid, songfile)
+	if err != nil {
+		return err
+	}
+
+	tx.Commit()
+
+	return nil
+}
+
+func (s *SongService) UploadSongSpotify(ctx *gin.Context, userid int, songid int, spotifyuri string) error {
+	// see if user controls song
+	controls, err := userControlsSong(ctx.Request.Context(), s.db.db, userid, songid)
+	if err != nil {
+		return err
+	}
+
+	if !controls {
+		return fmt.Errorf("User %v doesn't control song %v\n", userid, songid)
+	}
+
+	tx, err := s.db.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	err = uploadSongSpotify(ctx, tx, userid, songid, spotifyuri)
 	if err != nil {
 		return err
 	}
@@ -218,6 +245,18 @@ func uploadSong(ctx *gin.Context, tx *sql.Tx, userid int, songid int, songfile *
 		UPDATE re_songs
 		SET originalfilename = ?, filehash = ? WHERE song_id = ?
 	`, songfile.Filename, hash, songid)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func uploadSongSpotify(ctx *gin.Context, tx *sql.Tx, userid int, songid int, spotifyuri string) error {
+	_, err := tx.ExecContext(ctx, `
+		UPDATE re_songs
+		SET spotifyuri = ? WHERE song_id = ?
+	`, spotifyuri, songid)
 	if err != nil {
 		return err
 	}

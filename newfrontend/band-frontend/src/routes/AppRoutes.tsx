@@ -8,8 +8,8 @@ import { useAuth } from "../auth/useAuth";
 function RootRedirect() {
     const { initialized, authenticated } = useAuth();
 
-    console.log("Init: ", initialized);
-    console.log("Auth: ", authenticated);
+    // console.log("Init: ", initialized);
+    // console.log("Auth: ", authenticated);
 
     if (!initialized) {
         return <div>Loading...</div>

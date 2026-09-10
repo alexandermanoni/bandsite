@@ -14,6 +14,9 @@ type Song struct {
 	// song name
 	Name string `json:"name"`
 
+	// spotify uri for song
+	SpotifyURI string `json:"spotifyURI"`
+
 	// song position in setlist (changes per setlist)
 	Position string `json:"position"`
 }
@@ -24,6 +27,9 @@ type SongService interface {
 
 	// upload a song's audio file
 	UploadSongSource(ctx *gin.Context, userid int, songid int, songfile *multipart.FileHeader) error
+
+	// upload a song's spotify url
+	UploadSongSpotify(ctx *gin.Context, userid int, songid int, spotifyuri string) error
 
 	// return a list of songs a band has
 	FindSongsByBand(ctx context.Context, userid int, bandid int) ([]Song, error)

@@ -35,7 +35,7 @@ export async function apiFetch(
 
     let response = await makeRequest();
 
-    console.log("Res: ", response);
+    //console.log("Res: ", response);
 
     // token valid (no status unauthorized)
     if (response.status !== 401) {
@@ -67,4 +67,34 @@ export async function apiFetch(
     authStorage.setToken(data.accessToken);
 
     return makeRequest();
+}
+
+export async function spotifyApiFetch(
+    url: string,
+    options: RequestInit = {}
+): Promise<Response> {
+    const makeRequest = async () => {
+        const token = authStorage.getSpotifyAccessToken();
+
+        const headers = new Headers(options.headers);
+
+        if (token) {
+            headers.set("Authorization", `Bearer ${token}`);
+        }
+
+        return fetch(url, {
+            ...options,
+            headers,
+        });
+    }
+
+    let response = await makeRequest();
+
+    return response;
+
+    // this needs to be updated to handle invalid tokens and stuff
+    // // token valid
+    // if (response.status !== 401) {
+    //     return response;
+    // }
 }

@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { SpotifyAuthContext } from "../../../auth/SpotifyAuthContext";
 
 // redirect user to spotify authorization page
 async function redirectToAuthCodeFlow(clientId: string) {
@@ -96,7 +97,7 @@ async function fetchProfile(token: string): Promise<any> {
     return await result.json();
 }
 
-function SpotifyProfileViewer() {
+function LolSpotifyProfileViewer() {
     // id of the spotify app I created for SCU
     const clientId = "45f312337d664a3db729bada4d7cb8dc";
     // get params (like spotify code) from url search
@@ -130,6 +131,27 @@ function SpotifyProfileViewer() {
             <div>
                 Hello :D
             </div>
+        </>
+    );
+}
+
+function SpotifyProfileViewer() {
+    const context = useContext(SpotifyAuthContext);
+    
+    return (
+        <>
+            {
+                context.authenticated &&
+                <div>
+                    Logged in to Spotify
+                </div>
+            }
+            {
+                !context.authenticated &&
+                <button type="button" onClick={context.login}>
+                    Click to log in to Spotify
+                </button>
+            }
         </>
     );
 }
